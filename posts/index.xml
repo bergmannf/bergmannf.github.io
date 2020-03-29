@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Personal Blog</title>
-    <link>http://bergmannf.github.io/posts/</link>
-    <description>Recent content in Posts on Personal Blog</description>
+    <title>Posts on Personal blog</title>
+    <link>https://bergmannf.github.io/posts/</link>
+    <description>Recent content in Posts on Personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>This is a customized copyright.</copyright>
     <lastBuildDate>Sun, 29 Mar 2020 16:40:34 +0200</lastBuildDate>
     
-	<atom:link href="http://bergmannf.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://bergmannf.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Test Post</title>
-      <link>http://bergmannf.github.io/posts/test-post/</link>
+      <link>https://bergmannf.github.io/posts/test-post/</link>
       <pubDate>Sun, 29 Mar 2020 16:40:34 +0200</pubDate>
       
-      <guid>http://bergmannf.github.io/posts/test-post/</guid>
+      <guid>https://bergmannf.github.io/posts/test-post/</guid>
       <description> Test post This post has no content is just for testing:
-print(&amp;quot;Hello World&amp;quot;)  </description>
+def func(str1): return str print(&amp;quot;Hello World&amp;quot;)  </description>
     </item>
     
   </channel>
