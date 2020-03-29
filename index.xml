@@ -23,6 +23,25 @@ def func(str1): return str print(&amp;quot;Hello World&amp;quot;)  </description
     </item>
     
     <item>
+      <title>Test post with ox-hugo</title>
+      <link>https://bergmannf.github.io/posts/text-ox-hugo/</link>
+      <pubDate>Sun, 29 Mar 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://bergmannf.github.io/posts/text-ox-hugo/</guid>
+      <description>This is a test post using ox-hugo
+def main(): print(&amp;quot;Hello World&amp;quot;)  </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://bergmannf.github.io/posts/posts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bergmannf.github.io/posts/posts/</guid>
+      <description>Personal blog Test post with ox-hugo   This is a test post using ox-hugo def main(): print(&amp;#34;Hello World&amp;#34;)  </description>
+    </item>
+    
+    <item>
       <title>About</title>
       <link>https://bergmannf.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
