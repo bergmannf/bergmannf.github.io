@@ -3,11 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://bergmannf.github.io/categories/</loc>
+    <loc>http://bergmannf.github.io/</loc>
+    <lastmod>2020-03-29T16:40:34+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://bergmannf.github.io/</loc>
+    <loc>http://bergmannf.github.io/posts/</loc>
+    <lastmod>2020-03-29T16:40:34+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://bergmannf.github.io/posts/test-post/</loc>
+    <lastmod>2020-03-29T16:40:34+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://bergmannf.github.io/categories/</loc>
   </url>
   
   <url>
