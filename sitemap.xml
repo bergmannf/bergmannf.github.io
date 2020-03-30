@@ -3,23 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://bergmannf.github.io/posts/openssh-private-key/</loc>
+    <lastmod>2020-03-31T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://bergmannf.github.io/tags/openssh/</loc>
+    <lastmod>2020-03-31T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://bergmannf.github.io/</loc>
-    <lastmod>2020-03-29T16:40:34+02:00</lastmod>
+    <lastmod>2020-03-31T00:00:00+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://bergmannf.github.io/posts/</loc>
-    <lastmod>2020-03-29T16:40:34+02:00</lastmod>
+    <lastmod>2020-03-31T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://bergmannf.github.io/posts/test-post/</loc>
-    <lastmod>2020-03-29T16:40:34+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://bergmannf.github.io/posts/text-ox-hugo/</loc>
-    <lastmod>2020-03-29T00:00:00+01:00</lastmod>
+    <loc>https://bergmannf.github.io/tags/</loc>
+    <lastmod>2020-03-31T00:00:00+02:00</lastmod>
   </url>
   
   <url>
@@ -32,10 +37,6 @@
   
   <url>
     <loc>https://bergmannf.github.io/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>https://bergmannf.github.io/tags/</loc>
   </url>
   
 </urlset>

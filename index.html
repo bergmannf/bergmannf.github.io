@@ -24,7 +24,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://bergmannf.github.io/" />
 
-<meta property="og:updated_time" content="2020-03-29T16:40:34+02:00" /><meta property="og:site_name" content="My personal blog" />
+<meta property="og:updated_time" content="2020-03-31T00:00:00+02:00" /><meta property="og:site_name" content="My personal blog" />
 
 
     
@@ -150,37 +150,20 @@
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/posts/test-post/" >Test Post</a>
+          <a href="/posts/openssh-private-key/" >Converting openssh private key to PEM format</a>
         </span>
         <span class="item__date">
-          Mar 29, 2020
+          Mar 31, 2020
         </span>
         <span >
         
-         Test post This post has no content is just for testing:
-def func(str1): return str print(&quot;Hello World&quot;)  
+        Newer version of the openssh will use their own format to store a private key:
+-----BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY-----  The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).
+To convert the key use ssh-keygen. The command will overwrite the private key file, so if the original key should be preserved make sure to create a backup:
         
         </span>
         
-        </div>
-        
-     
-      
-        
-      
-      <div class="post-list__item">
-        <span class="item__title--big">
-          <a href="/posts/text-ox-hugo/" >Test post with ox-hugo</a>
-        </span>
-        <span class="item__date">
-          Mar 29, 2020
-        </span>
-        <span >
-        
-        This is a test post using ox-hugo
-def main(): print(&quot;Hello World&quot;)  
-        
-        </span>
+          ... <a class="read-more-symbol" href="/posts/openssh-private-key/">➦</a>
         
         </div>
         
@@ -197,9 +180,11 @@ def main(): print(&quot;Hello World&quot;)
         </span>
         <span >
         
-        Personal blog Test post with ox-hugo   This is a test post using ox-hugo def main(): print(&#34;Hello World&#34;)  
+        Personal blog Converting openssh private key to PEM format&#xa0;&#xa0;&#xa0;openssh   Newer version of the openssh will use their own format to store a private key: -----BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY-----   The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).  To convert the key use ssh-keygen.
         
         </span>
+        
+          ... <a class="read-more-symbol" href="/posts/posts/">➦</a>
         
         </div>
         
