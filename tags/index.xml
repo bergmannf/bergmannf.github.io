@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This is a customized copyright.</copyright>
-    <lastBuildDate>Tue, 31 Mar 2020 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 18 Apr 2020 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://bergmannf.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>arm</title>
+      <link>https://bergmannf.github.io/tags/arm/</link>
+      <pubDate>Sat, 18 Apr 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://bergmannf.github.io/tags/arm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://bergmannf.github.io/tags/kubernetes/</link>
+      <pubDate>Sat, 18 Apr 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://bergmannf.github.io/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>raspberry</title>
+      <link>https://bergmannf.github.io/tags/raspberry/</link>
+      <pubDate>Sat, 18 Apr 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://bergmannf.github.io/tags/raspberry/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>openssh</title>
