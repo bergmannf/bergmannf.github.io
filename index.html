@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.59.1" />
+<meta name="generator" content="Hugo 0.69.0" />
 
     
 
@@ -23,8 +23,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://bergmannf.github.io/" />
-
-<meta property="og:updated_time" content="2020-04-18T00:00:00+02:00" /><meta property="og:site_name" content="My personal blog" />
+<meta property="og:updated_time" content="2020-05-08T22:59:00+02:00" /><meta property="og:site_name" content="My personal blog" />
 
 
     
@@ -39,7 +38,7 @@
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.9181f25ed2263aeb878ec6f8a84f10c4ebb16150000fca8767308880bdde5ca0.css" integrity="sha256-kYHyXtImOuuHjsb4qE8QxOuxYVAAD8qHZzCIgL3eXKA=">
+<link rel="stylesheet" href="/scss/hyde-hyde.3081c4981fb69a2783dd36ecfdd0e6ba7a158d4cbfdd290ebce8f78ba0469fc6.css" integrity="sha256-MIHEmB&#43;2mieD3Tbs/dDmunoVjUy/3SkOvOj3i6BGn8Y=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -153,7 +152,7 @@
           <a href="/posts/teamspeak-k8s-arm/" >Deploying Teamspeak on a Raspberry PI kubernetes cluster</a>
         </span>
         <span class="item__date">
-          Apr 18, 2020
+          May 08, 2020
         </span>
         <span >
         
@@ -173,20 +172,20 @@ To deploy a teamspeak server on raspberry pi a few things need to be done:
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/posts/openssh-private-key/" >Converting openssh private key to PEM format</a>
+          <a href="/posts/testing-ansible-collections/" >Testing an ansible collection</a>
         </span>
         <span class="item__date">
-          Mar 31, 2020
+          May 08, 2020
         </span>
         <span >
         
-        Newer version of the openssh will use their own format to store a private key:
------BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY-----  The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).
-To convert the key use ssh-keygen. The command will overwrite the private key file, so if the original key should be preserved make sure to create a backup:
+        When wanting to work on a collection for ansible it is (for now1) important to check it out in a very specific folder structure or it will not be possible to run the tests for it.
+When trying to run ansible-test integration it will otherwise throw the following error:
+ERROR: The current working directory must be at or below: - an Ansible collection: {...}/ansible_collections/{namespace}/{collection}/ Current working directory: &lt;some_other_dir&gt; The collection must be really placed inside a subfolder of a folder called ansible_collections and neither namespace nor collection can contain any symbols except alphanumberics or underscores ([a-zA-Z0-9_]):
         
         </span>
         
-          ... <a class="read-more-symbol" href="/posts/openssh-private-key/">➦</a>
+          ... <a class="read-more-symbol" href="/posts/testing-ansible-collections/">➦</a>
         
         </div>
         
@@ -196,18 +195,20 @@ To convert the key use ssh-keygen. The command will overwrite the private key fi
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/posts/posts/" ></a>
+          <a href="/posts/openssh-private-key/" >Converting openssh private key to PEM format</a>
         </span>
         <span class="item__date">
-          Jan 01, 0001
+          Mar 31, 2020
         </span>
         <span >
         
-        Personal blog Converting openssh private key to PEM format&#xa0;&#xa0;&#xa0;openssh   Newer versions of the openssh will use their own format to store a private key: -----BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY-----   The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).  To convert the key use ssh-keygen.
+        Newer version of the openssh will use their own format to store a private key:
+-----BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY----- The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).
+To convert the key use ssh-keygen. The command will overwrite the private key file, so if the original key should be preserved make sure to create a backup:
         
         </span>
         
-          ... <a class="read-more-symbol" href="/posts/posts/">➦</a>
+          ... <a class="read-more-symbol" href="/posts/openssh-private-key/">➦</a>
         
         </div>
         
