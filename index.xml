@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This is a customized copyright.</copyright>
-    <lastBuildDate>Sat, 18 Apr 2020 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 08 May 2020 22:59:00 +0200</lastBuildDate>
     
 	<atom:link href="https://bergmannf.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,12 +15,23 @@
     <item>
       <title>Deploying Teamspeak on a Raspberry PI kubernetes cluster</title>
       <link>https://bergmannf.github.io/posts/teamspeak-k8s-arm/</link>
-      <pubDate>Sat, 18 Apr 2020 00:00:00 +0200</pubDate>
+      <pubDate>Fri, 08 May 2020 22:59:00 +0200</pubDate>
       
       <guid>https://bergmannf.github.io/posts/teamspeak-k8s-arm/</guid>
       <description>While this post will end up with a running Teamspeak server, it is very hard on the resources of the Raspberry Pi and might not be suitable for everyday use.
 To deploy a teamspeak server on raspberry pi a few things need to be done:
  (optional) Get a Kubernetes cluster up and running (this is not required, if you just want to run the docker container directly). Get Teamspeak to run on ARM.</description>
+    </item>
+    
+    <item>
+      <title>Testing an ansible collection</title>
+      <link>https://bergmannf.github.io/posts/testing-ansible-collections/</link>
+      <pubDate>Fri, 08 May 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://bergmannf.github.io/posts/testing-ansible-collections/</guid>
+      <description>When wanting to work on a collection for ansible it is (for now1) important to check it out in a very specific folder structure or it will not be possible to run the tests for it.
+When trying to run ansible-test integration it will otherwise throw the following error:
+ERROR: The current working directory must be at or below: - an Ansible collection: {...}/ansible_collections/{namespace}/{collection}/ Current working directory: &amp;lt;some_other_dir&amp;gt; The collection must be really placed inside a subfolder of a folder called ansible_collections and neither namespace nor collection can contain any symbols except alphanumberics or underscores ([a-zA-Z0-9_]):</description>
     </item>
     
     <item>
@@ -30,17 +41,8 @@ To deploy a teamspeak server on raspberry pi a few things need to be done:
       
       <guid>https://bergmannf.github.io/posts/openssh-private-key/</guid>
       <description>Newer version of the openssh will use their own format to store a private key:
------BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY-----  The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).
+-----BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY----- The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).
 To convert the key use ssh-keygen. The command will overwrite the private key file, so if the original key should be preserved make sure to create a backup:</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://bergmannf.github.io/posts/posts/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://bergmannf.github.io/posts/posts/</guid>
-      <description>Personal blog Converting openssh private key to PEM format&amp;#xa0;&amp;#xa0;&amp;#xa0;openssh   Newer versions of the openssh will use their own format to store a private key: -----BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY-----   The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).  To convert the key use ssh-keygen.</description>
     </item>
     
     <item>
