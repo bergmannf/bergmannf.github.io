@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Personal blog</title>
-    <link>https://bergmannf.github.io/</link>
+    <link>https://blog.niflheim.cc/</link>
     <description>Recent content on Personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 08 May 2020 22:59:00 +0200</lastBuildDate>
     
-	<atom:link href="https://bergmannf.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.niflheim.cc/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Deploying Teamspeak on a Raspberry PI kubernetes cluster</title>
-      <link>https://bergmannf.github.io/posts/teamspeak-k8s-arm/</link>
+      <link>https://blog.niflheim.cc/posts/teamspeak-k8s-arm/</link>
       <pubDate>Fri, 08 May 2020 22:59:00 +0200</pubDate>
       
-      <guid>https://bergmannf.github.io/posts/teamspeak-k8s-arm/</guid>
+      <guid>https://blog.niflheim.cc/posts/teamspeak-k8s-arm/</guid>
       <description>&lt;p&gt;While this post will end up with a running &lt;a href=&#34;https://www.teamspeak.com/en/&#34;&gt;Teamspeak&lt;/a&gt; server, it is very hard
 on the resources of the Raspberry Pi and might not be suitable for everyday
 use.&lt;/p&gt;
@@ -210,10 +210,10 @@ Events:                   &amp;lt;none&amp;gt;
     
     <item>
       <title>Testing an ansible collection</title>
-      <link>https://bergmannf.github.io/posts/testing-ansible-collections/</link>
+      <link>https://blog.niflheim.cc/posts/testing-ansible-collections/</link>
       <pubDate>Fri, 08 May 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://bergmannf.github.io/posts/testing-ansible-collections/</guid>
+      <guid>https://blog.niflheim.cc/posts/testing-ansible-collections/</guid>
       <description>&lt;p&gt;When wanting to work on a collection for &lt;code&gt;ansible&lt;/code&gt; it is (for now&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;) important
 to check it out in a very specific folder structure or it will not be possible
 to run the tests for it.&lt;/p&gt;
@@ -256,10 +256,10 @@ poetry run ansible-test integration
     
     <item>
       <title>Converting openssh private key to PEM format</title>
-      <link>https://bergmannf.github.io/posts/openssh-private-key/</link>
+      <link>https://blog.niflheim.cc/posts/openssh-private-key/</link>
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://bergmannf.github.io/posts/openssh-private-key/</guid>
+      <guid>https://blog.niflheim.cc/posts/openssh-private-key/</guid>
       <description>&lt;p&gt;Newer version of the &lt;code&gt;openssh&lt;/code&gt; will use their own format to store a private
 key:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;-----BEGIN OPENSSH PRIVATE KEY-----
@@ -280,10 +280,10 @@ BASE64KEYTEXT
     
     <item>
       <title>About</title>
-      <link>https://bergmannf.github.io/about/</link>
+      <link>https://blog.niflheim.cc/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://bergmannf.github.io/about/</guid>
+      <guid>https://blog.niflheim.cc/about/</guid>
       <description>&lt;h1 id=&#34;this-is-a-test-about-page&#34;&gt;This is a test about page&lt;/h1&gt;
 &lt;p&gt;Mostly empty about page.&lt;/p&gt;
 </description>

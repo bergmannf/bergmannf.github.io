@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>openssh on Personal blog</title>
-    <link>https://bergmannf.github.io/tags/openssh/</link>
+    <link>https://blog.niflheim.cc/tags/openssh/</link>
     <description>Recent content in openssh on Personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 31 Mar 2020 00:00:00 +0200</lastBuildDate>
     
-	<atom:link href="https://bergmannf.github.io/tags/openssh/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.niflheim.cc/tags/openssh/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Converting openssh private key to PEM format</title>
-      <link>https://bergmannf.github.io/posts/openssh-private-key/</link>
+      <link>https://blog.niflheim.cc/posts/openssh-private-key/</link>
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://bergmannf.github.io/posts/openssh-private-key/</guid>
+      <guid>https://blog.niflheim.cc/posts/openssh-private-key/</guid>
       <description>&lt;p&gt;Newer version of the &lt;code&gt;openssh&lt;/code&gt; will use their own format to store a private
 key:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;-----BEGIN OPENSSH PRIVATE KEY-----

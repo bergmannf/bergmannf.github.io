@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>raspberry on Personal blog</title>
-    <link>https://bergmannf.github.io/tags/raspberry/</link>
+    <link>https://blog.niflheim.cc/tags/raspberry/</link>
     <description>Recent content in raspberry on Personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 08 May 2020 22:59:00 +0200</lastBuildDate>
     
-	<atom:link href="https://bergmannf.github.io/tags/raspberry/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.niflheim.cc/tags/raspberry/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Deploying Teamspeak on a Raspberry PI kubernetes cluster</title>
-      <link>https://bergmannf.github.io/posts/teamspeak-k8s-arm/</link>
+      <link>https://blog.niflheim.cc/posts/teamspeak-k8s-arm/</link>
       <pubDate>Fri, 08 May 2020 22:59:00 +0200</pubDate>
       
-      <guid>https://bergmannf.github.io/posts/teamspeak-k8s-arm/</guid>
+      <guid>https://blog.niflheim.cc/posts/teamspeak-k8s-arm/</guid>
       <description>&lt;p&gt;While this post will end up with a running &lt;a href=&#34;https://www.teamspeak.com/en/&#34;&gt;Teamspeak&lt;/a&gt; server, it is very hard
 on the resources of the Raspberry Pi and might not be suitable for everyday
 use.&lt;/p&gt;

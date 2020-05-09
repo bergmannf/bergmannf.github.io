@@ -2,57 +2,57 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Personal blog</title>
-    <link>https://bergmannf.github.io/tags/</link>
+    <link>https://blog.niflheim.cc/tags/</link>
     <description>Recent content in Tags on Personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 08 May 2020 22:59:00 +0200</lastBuildDate>
     
-	<atom:link href="https://bergmannf.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.niflheim.cc/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>arm</title>
-      <link>https://bergmannf.github.io/tags/arm/</link>
+      <link>https://blog.niflheim.cc/tags/arm/</link>
       <pubDate>Fri, 08 May 2020 22:59:00 +0200</pubDate>
       
-      <guid>https://bergmannf.github.io/tags/arm/</guid>
+      <guid>https://blog.niflheim.cc/tags/arm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>kubernetes</title>
-      <link>https://bergmannf.github.io/tags/kubernetes/</link>
+      <link>https://blog.niflheim.cc/tags/kubernetes/</link>
       <pubDate>Fri, 08 May 2020 22:59:00 +0200</pubDate>
       
-      <guid>https://bergmannf.github.io/tags/kubernetes/</guid>
+      <guid>https://blog.niflheim.cc/tags/kubernetes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>raspberry</title>
-      <link>https://bergmannf.github.io/tags/raspberry/</link>
+      <link>https://blog.niflheim.cc/tags/raspberry/</link>
       <pubDate>Fri, 08 May 2020 22:59:00 +0200</pubDate>
       
-      <guid>https://bergmannf.github.io/tags/raspberry/</guid>
+      <guid>https://blog.niflheim.cc/tags/raspberry/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ansible</title>
-      <link>https://bergmannf.github.io/tags/ansible/</link>
+      <link>https://blog.niflheim.cc/tags/ansible/</link>
       <pubDate>Fri, 08 May 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://bergmannf.github.io/tags/ansible/</guid>
+      <guid>https://blog.niflheim.cc/tags/ansible/</guid>
       <description></description>
     </item>
     
     <item>
       <title>openssh</title>
-      <link>https://bergmannf.github.io/tags/openssh/</link>
+      <link>https://blog.niflheim.cc/tags/openssh/</link>
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://bergmannf.github.io/tags/openssh/</guid>
+      <guid>https://blog.niflheim.cc/tags/openssh/</guid>
       <description></description>
     </item>
     
