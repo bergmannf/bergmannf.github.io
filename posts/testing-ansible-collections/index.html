@@ -138,7 +138,7 @@ to check it out in a very specific folder structure or it will not be possible
 to run the tests for it.</p>
 <p>When trying to run <code>ansible-test integration</code> it will otherwise throw the
 following error:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">ERROR: The current working directory must be at or below:
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">ERROR: The current working directory must be at or below:
 
  - an Ansible collection: {...}/ansible_collections/{namespace}/{collection}/
 
@@ -146,20 +146,20 @@ Current working directory: &lt;some_other_dir&gt;
 </code></pre></div><p>The collection must be really placed inside a <code>subfolder</code> of a folder called
 <code>ansible_collections</code> and neither <code>namespace</code> nor <code>collection</code> can contain
 any symbols except <code>alphanumberics</code> or <code>underscores</code> (<code>[a-zA-Z0-9_]</code>):</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ansible_collections
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ansible_collections
 └── namespace
     └── collection
 </code></pre></div><p>So if you want to work on an upstream collection (e.g. <a href="https://github.com/ansible-collections/community.general">community.general</a>) you
 should create an intermediate folder <code>community</code> and clone the collection into
 the <code>general</code> folder (contrary to the default checkout which would be
 <code>community.general</code>):</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ansible_collections
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ansible_collections
 └── community
     └── general
 </code></pre></div><p>Inside <code>general</code> you can now use run <code>ansible-test integration</code> to run
 the integration tests successfully:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#fff;font-weight:bold">cd</span> ansible_collections/community/general
-poetry init --name community.general --dependency=ansible --dependency=pyyaml --dependency=jinja2 -n
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#366">cd</span> ansible_collections/community/general
+poetry init --name community.general --dependency<span style="color:#555">=</span>ansible --dependency<span style="color:#555">=</span>pyyaml --dependency<span style="color:#555">=</span>jinja2 -n
 poetry install
 poetry run ansible-test integration
 </code></pre></div><section class="footnotes" role="doc-endnotes">

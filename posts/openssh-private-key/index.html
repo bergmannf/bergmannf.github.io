@@ -135,7 +135,7 @@ To convert the key use ssh-keygen. The command will overwrite the private key fi
         
         <p>Newer version of the <code>openssh</code> will use their own format to store a private
 key:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-----BEGIN OPENSSH PRIVATE KEY-----
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-----BEGIN OPENSSH PRIVATE KEY-----
 BASE64KEYTEXT
 -----END OPENSSH PRIVATE KEY-----
 </code></pre></div><p>The traditional format of the key can sometimes be useful (or even required -
@@ -143,9 +143,9 @@ for example <a href="https://guacamole.apache.org/">guacamole</a> will not be ab
 <p>To convert the key use <code>ssh-keygen</code>. The command will overwrite the private
 key file, so if the original key should be preserved make sure to create a
 backup:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh-keygen -p -m PEM -f ~/.ssh/id_rsa_test
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh-keygen -p -m PEM -f ~/.ssh/id_rsa_test
 </code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-----BEGIN RSA PRIVATE KEY-----
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-----BEGIN RSA PRIVATE KEY-----
 BASE64KEYTEXT
 -----END RSA PRIVATE KEY-----
 </code></pre></div>
