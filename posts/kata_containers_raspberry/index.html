@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Florian Bergmann">
+    <meta name="description" content="CLOSED: [2020-05-21 Thu 21:57]To install kata-containers on a raspberry-pi and integrating it into kubernetes a few steps are currently required:
+ Install kata-containers Setup integration into containerd Setup integration into kubernetes  Install kata-containers Currently the easiest (and apparently only) officially supported way to install kata-containers on an aarch64 system is to use snaps.
+If you are using the Ubuntu arm version this is already included in the installation and you can install kata-containers with a single command1:">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Install kata-containers on K3S on aarch64"/>
+<meta name="twitter:description" content="CLOSED: [2020-05-21 Thu 21:57]To install kata-containers on a raspberry-pi and integrating it into kubernetes a few steps are currently required:
+ Install kata-containers Setup integration into containerd Setup integration into kubernetes  Install kata-containers Currently the easiest (and apparently only) officially supported way to install kata-containers on an aarch64 system is to use snaps.
+If you are using the Ubuntu arm version this is already included in the installation and you can install kata-containers with a single command1:"/>
+
+    <meta property="og:title" content="Install kata-containers on K3S on aarch64" />
+<meta property="og:description" content="CLOSED: [2020-05-21 Thu 21:57]To install kata-containers on a raspberry-pi and integrating it into kubernetes a few steps are currently required:
+ Install kata-containers Setup integration into containerd Setup integration into kubernetes  Install kata-containers Currently the easiest (and apparently only) officially supported way to install kata-containers on an aarch64 system is to use snaps.
+If you are using the Ubuntu arm version this is already included in the installation and you can install kata-containers with a single command1:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.niflheim.cc/posts/kata_containers_raspberry/" />
+<meta property="article:published_time" content="2020-05-21T00:00:00+02:00" />
+<meta property="article:modified_time" content="2020-05-21T00:00:00+02:00" />
+
+
+    
+      <base href="https://blog.niflheim.cc/posts/kata_containers_raspberry/">
+    
+    <title>
+  Install kata-containers on K3S on aarch64 · Personal blog
+</title>
+
+    
+      <link rel="canonical" href="https://blog.niflheim.cc/posts/kata_containers_raspberry/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="https://blog.niflheim.cc/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="https://blog.niflheim.cc/css/coder-dark.min.e78e80fc3a585a4d1c8fc7f58623b6ff852411e38431a9cd1792877ecaa160f6.css" integrity="sha256-546A/DpYWk0cj8f1hiO2/4UkEeOEManNF5KHfsqhYPY=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="https://blog.niflheim.cc/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://blog.niflheim.cc/images/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.69.0" />
+  </head>
+
+  
+  
+    
+  
+  <body class="colorscheme-auto">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://blog.niflheim.cc/">
+      Personal blog
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://blog.niflheim.cc/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://blog.niflheim.cc/posts/">Blog</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">Install kata-containers on K3S on aarch64</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2020-05-21T00:00:00&#43;02:00'>
+                May 21, 2020
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              3-minute read
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://blog.niflheim.cc/tags/kubernetes/">kubernetes</a>
+      <span class="separator">•</span>
+    <a href="https://blog.niflheim.cc/tags/raspberry/">raspberry</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <p>CLOSED: <!-- raw HTML omitted --><!-- raw HTML omitted -->[2020-05-21 Thu 21:57]<!-- raw HTML omitted --><!-- raw HTML omitted -->
+To install <code>kata-containers</code> on a <code>raspberry-pi</code> and integrating it into
+<code>kubernetes</code> a few steps are currently required:</p>
+<ul>
+<li>Install <code>kata-containers</code></li>
+<li>Setup integration into <code>containerd</code></li>
+<li>Setup integration into <code>kubernetes</code></li>
+</ul>
+<h2 id="install-kata-containers">Install <code>kata-containers</code></h2>
+<p>Currently the easiest (and apparently only) officially supported way to
+install <code>kata-containers</code> on an <code>aarch64</code> system is to use <code>snaps</code>.</p>
+<p>If you are using the <code>Ubuntu</code> <code>arm</code> version this is already included in the
+installation and you can install <code>kata-containers</code> with a single command<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo snap install kata-containers --classic
+</code></pre></div><h2 id="integration-into-containerd">Integration into containerd</h2>
+<p>When running <code>k3s</code> there is no <code>containerd</code> binary as it is embedded into
+<code>k3s</code>, so configuration must be performed in the <code>k3s</code> configuration<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
+<p>The whole process includes the following steps:</p>
+<ul>
+<li>A <code>runtime</code> must be configured for <code>kata-containers</code> in <code>containerd</code>.</li>
+<li><code>shims</code> must be created for <code>containerd</code> to use <code>kata-containers</code>.</li>
+<li>The node must be configured to be able to run <code>kata-container</code> workloads.</li>
+<li>The kubernetes cluster must be aware that <code>kata</code> is a valid runtime.</li>
+</ul>
+<p>To configure a <code>runtime</code>, the configuration file for <code>k3s</code> is found under:
+<code>/var/lib/rancher/k3s/agent/etc/containerd/config.toml</code>, however it can not
+be edited as it will be regenerated every time <code>k3s</code> is restarted. Instead it
+<a href="https://rancher.com/docs/k3s/latest/en/advanced/">should be copied</a> to
+<code>/var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl</code> and that file
+can be modified.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cp /var/lib/rancher/k3s/agent/etc/containerd/config.toml{,.tmpl}
+</code></pre></div><p>The content should be:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[plugins.cri.containerd.runtimes.kata]
+  runtime_type = <span style="color:#0ff;font-weight:bold">&#34;io.containerd.kata.v2&#34;</span>
+
+[kata.options]
+  ConfigPath = <span style="color:#0ff;font-weight:bold">&#34;/etc/kata-containers/configuration.toml&#34;</span>
+</code></pre></div><p>The configuration files for <code>/etc/kata-containers/*.toml</code> must be copied from
+the snap, because the default configuration will not be able to start on
+Raspberry Pis with &lt; 4GB of memory, as <code>qemu</code> requests too much memory by
+default:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mkdir -p /etc/kata-containers/
+cp /snap/kata-containers/current/usr/share/defaults/kata-containers/*.toml /etc/kata-containers/
+</code></pre></div><p>Inside these configuration files (depending on the Pi) make sure to adjust the
+value of <code>default_memory</code> to something the hardware can handle. You should at
+least adjust the default <code>configuration.toml</code> and <code>configuration-qemu.toml</code>.</p>
+<p>In addition <code>shim</code> files must be created in <code>/usr/local/bin</code> to point to the
+<code>shim</code> binaries of <code>kata-containers</code> for <code>containerd</code> to pick it up.</p>
+<p>The following script will create all the shims (including some that might not
+actually be supported) - it was copied out of the <code>kata-deploy</code> project.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#0f0;font-weight:bold">#!/bin/bash
+</span><span style="color:#0f0;font-weight:bold"></span>shims=(
+    <span style="color:#0ff;font-weight:bold">&#34;fc&#34;</span>
+    <span style="color:#0ff;font-weight:bold">&#34;qemu&#34;</span>
+    <span style="color:#0ff;font-weight:bold">&#34;qemu-virtiofs&#34;</span>
+    <span style="color:#0ff;font-weight:bold">&#34;clh&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">for</span> shim in <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">${</span>shims[@]<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#34;</span>; <span style="color:#fff;font-weight:bold">do</span>
+    shim_binary=<span style="color:#0ff;font-weight:bold">&#34;containerd-shim-kata-</span><span style="color:#0ff;font-weight:bold">${</span>shim<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">-v2&#34;</span>
+    shim_file=<span style="color:#0ff;font-weight:bold">&#34;/usr/local/bin/</span><span style="color:#0ff;font-weight:bold">${</span>shim_binary<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#34;</span>
+    shim_backup=<span style="color:#0ff;font-weight:bold">&#34;/usr/local/bin/</span><span style="color:#0ff;font-weight:bold">${</span>shim_binary<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">.bak&#34;</span>
+
+    <span style="color:#fff;font-weight:bold">if</span> [ -f <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">${</span>shim_file<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#34;</span> ]; <span style="color:#fff;font-weight:bold">then</span>
+        <span style="color:#fff;font-weight:bold">echo</span> <span style="color:#0ff;font-weight:bold">&#34;warning: </span><span style="color:#0ff;font-weight:bold">${</span>shim_binary<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold"> already exists&#34;</span> &gt;&amp;<span style="color:#ff0;font-weight:bold">2</span>
+        <span style="color:#fff;font-weight:bold">if</span> [ ! -f <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">${</span>shim_backup<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#34;</span> ]; <span style="color:#fff;font-weight:bold">then</span>
+            mv <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">${</span>shim_file<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">${</span>shim_backup<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#34;</span>
+        <span style="color:#fff;font-weight:bold">else</span>
+            rm <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">${</span>shim_file<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#34;</span>
+        <span style="color:#fff;font-weight:bold">fi</span>
+    <span style="color:#fff;font-weight:bold">fi</span>
+    cat <span style="color:#0ff;font-weight:bold">&lt;&lt; EOT | tee &#34;$shim_file&#34;
+</span><span style="color:#0ff;font-weight:bold">#!/bin/bash
+</span><span style="color:#0ff;font-weight:bold">KATA_CONF_FILE=/etc/kata-containers/configuration.toml /snap/kata-containers/current/usr/bin/containerd-shim-kata-v2 \$@
+</span><span style="color:#0ff;font-weight:bold">EOT</span>
+    chmod +x <span style="color:#0ff;font-weight:bold">&#34;</span>$shim_file<span style="color:#0ff;font-weight:bold">&#34;</span>
+<span style="color:#fff;font-weight:bold">done</span>
+
+<span style="color:#007f7f"># On the PI a default shim was also needed</span>
+cp /usr/local/bin/containerd-shim-kata-qemu-v2 /usr/local/bin/containerd-shim-kata-v2
+</code></pre></div><p>Now the <code>k3s-agent</code> must be restarted to reload the <code>containerd</code>
+configuration and we can test that kata-container runtime is working by
+running the following commands:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">systemctl restart k3s-agent
+ctr image pull docker.io/library/busybox:latest
+ctr run --runtime io.containerd.run.kata.v2 -t --rm docker.io/library/busybox:latest hello sh
+</code></pre></div><p>If the tests succeed the node can now be labeled as supporting <code>kata-containers</code>:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl label node <span style="color:#0ff;font-weight:bold">&#34;</span>$NODE_NAME<span style="color:#0ff;font-weight:bold">&#34;</span> --overwrite katacontainers.io/kata-runtime=<span style="color:#fff;font-weight:bold">true</span>
+</code></pre></div><p>Now as a last step a new <a href="https://kubernetes.io/docs/concepts/containers/runtime-class/">RuntimeClass</a> must be created for <code>kata</code> that can be
+used to force pods to be run using it:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#fff;font-weight:bold">apiVersion</span>: node.k8s.io/v1beta1
+<span style="color:#fff;font-weight:bold">kind</span>: RuntimeClass
+<span style="color:#fff;font-weight:bold">metadata</span>:
+  <span style="color:#fff;font-weight:bold">name</span>: kata
+<span style="color:#fff;font-weight:bold">handler</span>: kata
+</code></pre></div><p>Now pods can use this runtime by specifying <code>runtimeClassName</code> inside the <code>spec</code>:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#fff;font-weight:bold">apiVersion</span>: v1
+<span style="color:#fff;font-weight:bold">kind</span>: Pod
+<span style="color:#fff;font-weight:bold">metadata</span>:
+  <span style="color:#fff;font-weight:bold">name</span>: nginx-untrusted
+<span style="color:#fff;font-weight:bold">spec</span>:
+  <span style="color:#fff;font-weight:bold">runtimeClassName</span>: kata
+  <span style="color:#fff;font-weight:bold">containers</span>:
+  - <span style="color:#fff;font-weight:bold">name</span>: nginx
+    <span style="color:#fff;font-weight:bold">image</span>: nginx
+</code></pre></div><section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>As documented <a href="https://github.com/kata-containers/packaging/blob/master/snap/README.md#initial-setup">here</a>. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Most information in this section is a direct extract from <a href="https://github.com/kata-containers/packaging/pull/823">this PR</a> adding <code>k3s</code> support to <code>kata-deploy</code>. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nifl-blog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>All opinions expressed here are solely my own.</p>
+      
+      
+        ©
+        
+          2019 -
+        
+        2020
+         Florian Bergmann 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-165940833-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+    
+
+  </body>
+
+</html>

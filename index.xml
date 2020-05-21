@@ -6,10 +6,135 @@
     <description>Recent content on Personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 08 May 2020 22:59:00 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 21 May 2020 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://blog.niflheim.cc/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Install kata-containers on K3S on aarch64</title>
+      <link>https://blog.niflheim.cc/posts/kata_containers_raspberry/</link>
+      <pubDate>Thu, 21 May 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://blog.niflheim.cc/posts/kata_containers_raspberry/</guid>
+      <description>&lt;p&gt;CLOSED: &lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;[2020-05-21 Thu 21:57]&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
+To install &lt;code&gt;kata-containers&lt;/code&gt; on a &lt;code&gt;raspberry-pi&lt;/code&gt; and integrating it into
+&lt;code&gt;kubernetes&lt;/code&gt; a few steps are currently required:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Install &lt;code&gt;kata-containers&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Setup integration into &lt;code&gt;containerd&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Setup integration into &lt;code&gt;kubernetes&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;install-kata-containers&#34;&gt;Install &lt;code&gt;kata-containers&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Currently the easiest (and apparently only) officially supported way to
+install &lt;code&gt;kata-containers&lt;/code&gt; on an &lt;code&gt;aarch64&lt;/code&gt; system is to use &lt;code&gt;snaps&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you are using the &lt;code&gt;Ubuntu&lt;/code&gt; &lt;code&gt;arm&lt;/code&gt; version this is already included in the
+installation and you can install &lt;code&gt;kata-containers&lt;/code&gt; with a single command&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;sudo snap install kata-containers --classic
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;integration-into-containerd&#34;&gt;Integration into containerd&lt;/h2&gt;
+&lt;p&gt;When running &lt;code&gt;k3s&lt;/code&gt; there is no &lt;code&gt;containerd&lt;/code&gt; binary as it is embedded into
+&lt;code&gt;k3s&lt;/code&gt;, so configuration must be performed in the &lt;code&gt;k3s&lt;/code&gt; configuration&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;The whole process includes the following steps:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &lt;code&gt;runtime&lt;/code&gt; must be configured for &lt;code&gt;kata-containers&lt;/code&gt; in &lt;code&gt;containerd&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;shims&lt;/code&gt; must be created for &lt;code&gt;containerd&lt;/code&gt; to use &lt;code&gt;kata-containers&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The node must be configured to be able to run &lt;code&gt;kata-container&lt;/code&gt; workloads.&lt;/li&gt;
+&lt;li&gt;The kubernetes cluster must be aware that &lt;code&gt;kata&lt;/code&gt; is a valid runtime.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To configure a &lt;code&gt;runtime&lt;/code&gt;, the configuration file for &lt;code&gt;k3s&lt;/code&gt; is found under:
+&lt;code&gt;/var/lib/rancher/k3s/agent/etc/containerd/config.toml&lt;/code&gt;, however it can not
+be edited as it will be regenerated every time &lt;code&gt;k3s&lt;/code&gt; is restarted. Instead it
+&lt;a href=&#34;https://rancher.com/docs/k3s/latest/en/advanced/&#34;&gt;should be copied&lt;/a&gt; to
+&lt;code&gt;/var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl&lt;/code&gt; and that file
+can be modified.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;cp /var/lib/rancher/k3s/agent/etc/containerd/config.toml{,.tmpl}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The content should be:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;[plugins.cri.containerd.runtimes.kata]
+  runtime_type = &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;io.containerd.kata.v2&amp;#34;&lt;/span&gt;
+
+[kata.options]
+  ConfigPath = &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;/etc/kata-containers/configuration.toml&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The configuration files for &lt;code&gt;/etc/kata-containers/*.toml&lt;/code&gt; must be copied from
+the snap, because the default configuration will not be able to start on
+Raspberry Pis with &amp;lt; 4GB of memory, as &lt;code&gt;qemu&lt;/code&gt; requests too much memory by
+default:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;mkdir -p /etc/kata-containers/
+cp /snap/kata-containers/current/usr/share/defaults/kata-containers/*.toml /etc/kata-containers/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Inside these configuration files (depending on the Pi) make sure to adjust the
+value of &lt;code&gt;default_memory&lt;/code&gt; to something the hardware can handle. You should at
+least adjust the default &lt;code&gt;configuration.toml&lt;/code&gt; and &lt;code&gt;configuration-qemu.toml&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;In addition &lt;code&gt;shim&lt;/code&gt; files must be created in &lt;code&gt;/usr/local/bin&lt;/code&gt; to point to the
+&lt;code&gt;shim&lt;/code&gt; binaries of &lt;code&gt;kata-containers&lt;/code&gt; for &lt;code&gt;containerd&lt;/code&gt; to pick it up.&lt;/p&gt;
+&lt;p&gt;The following script will create all the shims (including some that might not
+actually be supported) - it was copied out of the &lt;code&gt;kata-deploy&lt;/code&gt; project.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#0f0;font-weight:bold&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;span style=&#34;color:#0f0;font-weight:bold&#34;&gt;&lt;/span&gt;shims=(
+    &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;fc&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;qemu&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;qemu-virtiofs&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;clh&amp;#34;&lt;/span&gt;
+)
+
+&lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;for&lt;/span&gt; shim in &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;${&lt;/span&gt;shims[@]&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt;; &lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;do&lt;/span&gt;
+    shim_binary=&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;containerd-shim-kata-&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;${&lt;/span&gt;shim&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;-v2&amp;#34;&lt;/span&gt;
+    shim_file=&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;/usr/local/bin/&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;${&lt;/span&gt;shim_binary&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt;
+    shim_backup=&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;/usr/local/bin/&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;${&lt;/span&gt;shim_binary&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;.bak&amp;#34;&lt;/span&gt;
+
+    &lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;if&lt;/span&gt; [ -f &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;${&lt;/span&gt;shim_file&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt; ]; &lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;then&lt;/span&gt;
+        &lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;warning: &lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;${&lt;/span&gt;shim_binary&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt; already exists&amp;#34;&lt;/span&gt; &amp;gt;&amp;amp;&lt;span style=&#34;color:#ff0;font-weight:bold&#34;&gt;2&lt;/span&gt;
+        &lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;if&lt;/span&gt; [ ! -f &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;${&lt;/span&gt;shim_backup&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt; ]; &lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;then&lt;/span&gt;
+            mv &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;${&lt;/span&gt;shim_file&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;${&lt;/span&gt;shim_backup&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;else&lt;/span&gt;
+            rm &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;${&lt;/span&gt;shim_file&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;fi&lt;/span&gt;
+    &lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;fi&lt;/span&gt;
+    cat &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;lt;&amp;lt; EOT | tee &amp;#34;$shim_file&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;KATA_CONF_FILE=/etc/kata-containers/configuration.toml /snap/kata-containers/current/usr/bin/containerd-shim-kata-v2 \$@
+&lt;/span&gt;&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;EOT&lt;/span&gt;
+    chmod +x &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt;$shim_file&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;done&lt;/span&gt;
+
+&lt;span style=&#34;color:#007f7f&#34;&gt;# On the PI a default shim was also needed&lt;/span&gt;
+cp /usr/local/bin/containerd-shim-kata-qemu-v2 /usr/local/bin/containerd-shim-kata-v2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now the &lt;code&gt;k3s-agent&lt;/code&gt; must be restarted to reload the &lt;code&gt;containerd&lt;/code&gt;
+configuration and we can test that kata-container runtime is working by
+running the following commands:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;systemctl restart k3s-agent
+ctr image pull docker.io/library/busybox:latest
+ctr run --runtime io.containerd.run.kata.v2 -t --rm docker.io/library/busybox:latest hello sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the tests succeed the node can now be labeled as supporting &lt;code&gt;kata-containers&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;kubectl label node &lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt;$NODE_NAME&lt;span style=&#34;color:#0ff;font-weight:bold&#34;&gt;&amp;#34;&lt;/span&gt; --overwrite katacontainers.io/kata-runtime=&lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now as a last step a new &lt;a href=&#34;https://kubernetes.io/docs/concepts/containers/runtime-class/&#34;&gt;RuntimeClass&lt;/a&gt; must be created for &lt;code&gt;kata&lt;/code&gt; that can be
+used to force pods to be run using it:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;: node.k8s.io/v1beta1
+&lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;kind&lt;/span&gt;: RuntimeClass
+&lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;metadata&lt;/span&gt;:
+  &lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;name&lt;/span&gt;: kata
+&lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;handler&lt;/span&gt;: kata
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now pods can use this runtime by specifying &lt;code&gt;runtimeClassName&lt;/code&gt; inside the &lt;code&gt;spec&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;: v1
+&lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;kind&lt;/span&gt;: Pod
+&lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;metadata&lt;/span&gt;:
+  &lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;name&lt;/span&gt;: nginx-untrusted
+&lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;spec&lt;/span&gt;:
+  &lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;runtimeClassName&lt;/span&gt;: kata
+  &lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;containers&lt;/span&gt;:
+  - &lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;name&lt;/span&gt;: nginx
+    &lt;span style=&#34;color:#fff;font-weight:bold&#34;&gt;image&lt;/span&gt;: nginx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;As documented &lt;a href=&#34;https://github.com/kata-containers/packaging/blob/master/snap/README.md#initial-setup&#34;&gt;here&lt;/a&gt;. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Most information in this section is a direct extract from &lt;a href=&#34;https://github.com/kata-containers/packaging/pull/823&#34;&gt;this PR&lt;/a&gt; adding &lt;code&gt;k3s&lt;/code&gt; support to &lt;code&gt;kata-deploy&lt;/code&gt;. &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
     
     <item>
       <title>Deploying Teamspeak on a Raspberry PI kubernetes cluster</title>
