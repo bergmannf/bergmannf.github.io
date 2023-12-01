@@ -65,7 +65,7 @@ ephemeral-containers (which is likely what you should use most of the time) nsen
   "headline": "Debugging kubernetes containers",
   "description" : "The scenario: you have a running kubernetes cluster, but suddenly some of your containers start to have problems.\nObviously now there must be a way to find out what exactly is causing these problems.\nIn this post I\u0026rsquo;ll highlight two ways to debug a container running on kubernetes:\nephemeral-containers (which is likely what you should use most of the time) nsenter (which is a last resort debugging option that requires access to the node the Pod is running on) Want to follow along?",
   "inLanguage" : "en",
-  "wordCount":  1476 ,
+  "wordCount":  1490 ,
   "datePublished" : "2023-12-01T00:00:00",
   "dateModified" : "2023-12-01T00:00:00",
   "image" : "https:\/\/blog.niflheim.cc\/",
@@ -262,6 +262,7 @@ node the Pod is running on)</li>
 <blockquote>
 <p>Want to follow along? Setup a test cluster and run the provided command to get
 your very own failing container:</p>
+<p>Save the following YAML to a file:</p>
 <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ff7b72">---</span><span style="color:#6e7681">
 </span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#7ee787">apiVersion</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">v1</span><span style="color:#6e7681">
 </span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#7ee787">kind</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">ConfigMap</span><span style="color:#6e7681">
@@ -302,8 +303,9 @@ your very own failing container:</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>- <span style="color:#7ee787">name</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">configuration</span><span style="color:#6e7681">
 </span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span><span style="color:#7ee787">configMap</span>:<span style="color:#6e7681">
 </span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span><span style="color:#7ee787">name</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">myconfig</span><span style="color:#6e7681">
-</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>minikube start
-</span></span><span style="display:flex;"><span>kubectl apply -f /some-web-url
+</span></span></span></code></pre></div><p>Now apply the manifests to your cluster:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>minikube start
+</span></span><span style="display:flex;"><span>kubectl apply -f <span style="color:#ff7b72;font-weight:bold">[</span>path_to_the_file<span style="color:#ff7b72;font-weight:bold">]</span>
 </span></span></code></pre></div></blockquote>
 <p>In this case one of the <code>LivenessProbes</code> starts failing.</p>
 <p>In case of one container (<code>working-container</code>), there is no way to debug into
