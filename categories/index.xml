@@ -5,10 +5,7 @@
     <link>https://blog.niflheim.cc/categories/</link>
     <description>Recent content in Categories on Personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="https://blog.niflheim.cc/categories/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en</language>
+    <atom:link href="https://blog.niflheim.cc/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

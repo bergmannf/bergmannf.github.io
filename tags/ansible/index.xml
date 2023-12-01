@@ -5,57 +5,17 @@
     <link>https://blog.niflheim.cc/tags/ansible/</link>
     <description>Recent content in ansible on Personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 08 May 2020 00:00:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://blog.niflheim.cc/tags/ansible/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en</language>
+    <lastBuildDate>Fri, 08 May 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://blog.niflheim.cc/tags/ansible/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Testing an ansible collection</title>
       <link>https://blog.niflheim.cc/posts/testing-ansible-collections/</link>
-      <pubDate>Fri, 08 May 2020 00:00:00 +0200</pubDate>
-      
+      <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
       <guid>https://blog.niflheim.cc/posts/testing-ansible-collections/</guid>
-      <description>&lt;p&gt;When wanting to work on a collection for &lt;code&gt;ansible&lt;/code&gt; it is (for now&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;) important
-to check it out in a very specific folder structure or it will not be possible
-to run the tests for it.&lt;/p&gt;
-&lt;p&gt;When trying to run &lt;code&gt;ansible-test integration&lt;/code&gt; it will otherwise throw the
-following error:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;ERROR: The current working directory must be at or below:
-
- - an Ansible collection: {...}/ansible_collections/{namespace}/{collection}/
-
-Current working directory: &amp;lt;some_other_dir&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The collection must be really placed inside a &lt;code&gt;subfolder&lt;/code&gt; of a folder called
-&lt;code&gt;ansible_collections&lt;/code&gt; and neither &lt;code&gt;namespace&lt;/code&gt; nor &lt;code&gt;collection&lt;/code&gt; can contain
-any symbols except &lt;code&gt;alphanumberics&lt;/code&gt; or &lt;code&gt;underscores&lt;/code&gt; (&lt;code&gt;[a-zA-Z0-9_]&lt;/code&gt;):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;ansible_collections
-└── namespace
-    └── collection
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;So if you want to work on an upstream collection (e.g. &lt;a href=&#34;https://github.com/ansible-collections/community.general&#34;&gt;community.general&lt;/a&gt;) you
-should create an intermediate folder &lt;code&gt;community&lt;/code&gt; and clone the collection into
-the &lt;code&gt;general&lt;/code&gt; folder (contrary to the default checkout which would be
-&lt;code&gt;community.general&lt;/code&gt;):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;ansible_collections
-└── community
-    └── general
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Inside &lt;code&gt;general&lt;/code&gt; you can now use run &lt;code&gt;ansible-test integration&lt;/code&gt; to run
-the integration tests successfully:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#366&#34;&gt;cd&lt;/span&gt; ansible_collections/community/general
-poetry init --name community.general --dependency&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;ansible --dependency&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;pyyaml --dependency&lt;span style=&#34;color:#555&#34;&gt;=&lt;/span&gt;jinja2 -n
-poetry install
-poetry run ansible-test integration
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;This might hopefully become easier in the future: &lt;a href=&#34;https://github.com/ansible/ansible/issues/60215&#34;&gt;https://github.com/ansible/ansible/issues/60215&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/section&gt;
-</description>
+      <description>When wanting to work on a collection for ansible it is (for now1) important to check it out in a very specific folder structure or it will not be possible to run the tests for it.
+When trying to run ansible-test integration it will otherwise throw the following error:
+ERROR: The current working directory must be at or below: - an Ansible collection: {...}/ansible_collections/{namespace}/{collection}/ Current working directory: &amp;lt;some_other_dir&amp;gt; The collection must be really placed inside a subfolder of a folder called ansible_collections and neither namespace nor collection can contain any symbols except alphanumberics or underscores ([a-zA-Z0-9_]):</description>
     </item>
-    
   </channel>
 </rss>

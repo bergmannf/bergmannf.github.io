@@ -5,35 +5,17 @@
     <link>https://blog.niflheim.cc/tags/openssh/</link>
     <description>Recent content in openssh on Personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 31 Mar 2020 00:00:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://blog.niflheim.cc/tags/openssh/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en</language>
+    <lastBuildDate>Tue, 31 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://blog.niflheim.cc/tags/openssh/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Converting openssh private key to PEM format</title>
       <link>https://blog.niflheim.cc/posts/openssh-private-key/</link>
-      <pubDate>Tue, 31 Mar 2020 00:00:00 +0200</pubDate>
-      
+      <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
       <guid>https://blog.niflheim.cc/posts/openssh-private-key/</guid>
-      <description>&lt;p&gt;Newer version of the &lt;code&gt;openssh&lt;/code&gt; will use their own format to store a private
-key:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;-----BEGIN OPENSSH PRIVATE KEY-----
-BASE64KEYTEXT
------END OPENSSH PRIVATE KEY-----
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The traditional format of the key can sometimes be useful (or even required -
-for example &lt;a href=&#34;https://guacamole.apache.org/&#34;&gt;guacamole&lt;/a&gt; will not be able to use the &lt;code&gt;OPENSSH&lt;/code&gt; key format).&lt;/p&gt;
-&lt;p&gt;To convert the key use &lt;code&gt;ssh-keygen&lt;/code&gt;. The command will overwrite the private
-key file, so if the original key should be preserved make sure to create a
-backup:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ssh-keygen -p -m PEM -f ~/.ssh/id_rsa_test
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;-----BEGIN RSA PRIVATE KEY-----
-BASE64KEYTEXT
------END RSA PRIVATE KEY-----
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+      <description>Newer version of the openssh will use their own format to store a private key:
+-----BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY----- The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).
+To convert the key use ssh-keygen. The command will overwrite the private key file, so if the original key should be preserved make sure to create a backup:</description>
     </item>
-    
   </channel>
 </rss>
