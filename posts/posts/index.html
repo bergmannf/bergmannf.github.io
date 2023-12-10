@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Personal blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="Personal blog Converting openssh private key to PEM format&#xa0;&#xa0;&#xa0;openssh Newer versions of the openssh will use their own format to store a private key:
+-----BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY----- The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).
+To convert the key use ssh-keygen. The command will overwrite the private key file, so if the original key should be preserved make sure to create a backup:">
+<meta name="author" content="Florian Bergmann">
+<link rel="canonical" href="https://blog.niflheim.cc/posts/posts/">
+<link crossorigin="anonymous" href="https://blog.niflheim.cc/assets/css/stylesheet.41d57c6d60ed753d1e30f2550c0e83c95e5df376fe471d353917de2dd6c9d7bd.css" integrity="sha256-QdV8bWDtdT0eMPJVDA6DyV5d83b&#43;Rx01ORfeLdbJ170=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://blog.niflheim.cc/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://blog.niflheim.cc/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://blog.niflheim.cc/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://blog.niflheim.cc/apple-touch-icon.png">
+<link rel="mask-icon" href="https://blog.niflheim.cc/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="" />
+<meta property="og:description" content="Personal blog Converting openssh private key to PEM format&#xa0;&#xa0;&#xa0;openssh Newer versions of the openssh will use their own format to store a private key:
+-----BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY----- The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).
+To convert the key use ssh-keygen. The command will overwrite the private key file, so if the original key should be preserved make sure to create a backup:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.niflheim.cc/posts/posts/" /><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Personal blog Converting openssh private key to PEM format&#xa0;&#xa0;&#xa0;openssh Newer versions of the openssh will use their own format to store a private key:
+-----BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY----- The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).
+To convert the key use ssh-keygen. The command will overwrite the private key file, so if the original key should be preserved make sure to create a backup:"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://blog.niflheim.cc/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "",
+      "item": "https://blog.niflheim.cc/posts/posts/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "",
+  "name": "",
+  "description": "Personal blog Converting openssh private key to PEM format\u0026#xa0;\u0026#xa0;\u0026#xa0;openssh Newer versions of the openssh will use their own format to store a private key:\n-----BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY----- The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).\nTo convert the key use ssh-keygen. The command will overwrite the private key file, so if the original key should be preserved make sure to create a backup:",
+  "keywords": [
+    
+  ],
+  "articleBody": "Personal blog Converting openssh private key to PEM format openssh Newer versions of the openssh will use their own format to store a private key:\n-----BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY----- The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).\nTo convert the key use ssh-keygen. The command will overwrite the private key file, so if the original key should be preserved make sure to create a backup:\n1 ssh-keygen -p -m PEM -f ~/.ssh/id_rsa_test -----BEGIN RSA PRIVATE KEY----- BASE64KEYTEXT -----END RSA PRIVATE KEY----- Deploying Teamspeak on a Raspberry PI kubernetes cluster kubernetes arm raspberry CLOSED: [2020-05-08 Fri 22:59]\nWhile this post will end up with a running Teamspeak server, it is very hard on the resources of the Raspberry Pi and might not be suitable for everyday use.\nTo deploy a teamspeak server on raspberry pi a few things need to be done:\n(optional) Get a Kubernetes cluster up and running (this is not required, if you just want to run the docker container directly). Get Teamspeak to run on ARM. Setup an ingress controller to make the Teamspeak server accessible from the outside world (in this case this will be the Nginx Ingress). Setting up a kubernetes cluster To setup a kubernetes cluster on Raspberry Pis K3S is very good approach, as the cluster will be more lightweight that simply installing upstream kubernetes.\nAs a base I recommend using HypriotOS or Ubuntu Server1 as those allow configuring the images using Cloud-Init.\nMake sure to follow the instructions to use the the legacy backend for iptables if installing kubernetes v1.17 or lower: kubeadm instructions.\nWhen installing k3s to run Teamspeak Traefik should not be installed, as only the 2.x version supports UDP ingresses - so instead nginx-ingress will be installed later:\n1 curl -sfL https://get.k3s.io | sh -s - --no-deploy=traefik Deploy Teamspeak Build an ARM image for Teamspeak Teamspeak does not provide a binary for ARM.\nIt is however possible to run it using Qemu - I have already prepared an ARM image that will run the Teamspeak server through qemu that you can find on my Dockerhub - or if you want to see the source checkout the repository on Github.\nThe image is using the same entrypoint.sh as the official image - so if you are already using that one you should be able to use it exactly the same way (if not - feel free to open an issue).\nDeploy the image Now - if you do not want to use kubernetes, you can simply use the image using docker and expose the required Teamspeak ports as you would with docker:\n1 docker run -p 9987:9987/udp -p 10011:10011 -p 30033:30033 -e TS3SERVER_LICENSE=accept monadt/teamspeak3-server This way is a lot easier on the resources and will likely run more reliable on a Raspberry PI with \u003c 2 GB of RAM.\nSetup nginx-ingress Get nginx-ingress to run on ARM Setting up the nginx-ingress on a cluster running on ARM needs a few extra steps when using the official documentation.\nThe images used in the manifests are not compatible with armv7 (that is used when running a cluster on a bunch of Raspberry Pis).\nFirst the mandatory.yaml has to be updated to use the images for the arm architecture2:\n1 wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml 2 sed -i 's/nginx-ingress-controller:0/nginx-ingress-controller-arm:0/' mandatory.yaml The resulting mandatory.yaml file can now be applied to the cluster:\n1 kubectl apply -f mandatory.yaml In my local cluster I am using the NodePort approach, so the service for that can be applied next:\n1 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/provider/baremetal/service-nodeport.yaml Setup a Teamspeak deployment With all pieces in place the Teamspeak container can now be deployed onto the cluster:\nSave the following yaml into a file (e.g. teamspeak.yaml).\n1 --- 2 apiVersion: v1 3 kind: Namespace 4 metadata: 5 name: teamspeak 6 --- 7 apiVersion: v1 8 kind: PersistentVolumeClaim 9 metadata: 10 name: teamspeak-pvc 11 namespace: teamspeak 12 spec: 13 accessModes: 14 - ReadWriteOnce 15 storageClassName: local-path 16 resources: 17 requests: 18 storage: 256Mi 19 --- 20 apiVersion: apps/v1 21 kind: Deployment 22 metadata: 23 name: teamspeak-deployment 24 namespace: teamspeak 25 labels: 26 app: teamspeak 27 spec: 28 replicas: 1 29 selector: 30 matchLabels: 31 app: teamspeak 32 template: 33 metadata: 34 namespace: teamspeak 35 labels: 36 app: teamspeak 37 spec: 38 containers: 39 - name: teamspeak-server 40 image: monadt/teamspeak3-server:3.11.0 41 ports: 42 - name: ts 43 containerPort: 9987 44 protocol: UDP 45 resources: 46 env: 47 - name: TS3SERVER_LICENSE 48 value: accept 49 volumeMounts: 50 - mountPath: /var/ts3server/ 51 name: teamspeak-data 52 volumes: 53 - name: teamspeak-data 54 persistentVolumeClaim: 55 claimName: teamspeak-pvc 56 --- 57 apiVersion: v1 58 kind: Service 59 metadata: 60 name: teamspeak-service 61 namespace: teamspeak 62 labels: 63 app: teamspeak 64 spec: 65 type: ClusterIP 66 ports: 67 - port: 9987 68 targetPort: ts 69 protocol: UDP 70 name: ts 71 selector: 72 app: teamspeak 73 --- 74 apiVersion: v1 75 kind: ConfigMap 76 metadata: 77 name: udp-services 78 namespace: ingress-nginx 79 data: 80 9987: \"teamspeak/teamspeak-service:9987\" Apply this using kubectl:\n1 kubectl apply -f teamspeak.yaml The 9987 udp port will also need to be added to the ingress service. In the ports section of the service add the following snippet:\n1 kubectl edit svc ingress-nginx -n ingress-nginx 1 - name: teamspeak 2 port: 9987 3 protocol: UDP 4 targetPort: 9987 Forwarding traffic to the ingress The final step depends a lot on the setup you are deploying the cluster in.\nIf it is behind your local router, you have to check which port was bound to the 9987 udp port and forward this to one of your cluster-nodes:\n1 kubectl describe svc ingress-nginx -n ingress-nginx 1 Name: ingress-nginx 2 Namespace: ingress-nginx 3 Labels: app.kubernetes.io/name=ingress-nginx 4 app.kubernetes.io/part-of=ingress-nginx 5 Annotations: Selector: app.kubernetes.io/name=ingress-nginx,app.kubernetes.io/part-of=ingress-nginx 6 Type: NodePort 7 IP: 10.43.33.70 8 Port: http 80/TCP 9 TargetPort: 80/TCP 10 NodePort: http 32224/TCP 11 Endpoints: 12 Port: https 443/TCP 13 TargetPort: 443/TCP 14 NodePort: https 31955/TCP 15 Endpoints: 16 Port: teamspeak 9987/UDP 17 TargetPort: 9987/UDP 18 NodePort: teamspeak 31222/UDP 19 Endpoints: 20 Session Affinity: None 21 External Traffic Policy: Cluster 22 Events: In this case the port that needs to be forwarded is the 31222 port (the NodePort for the 9987 UDP port).\nTesting an ansible collection ansible When wanting to work on a collection for ansible it is (for now3) important to check it out in a very specific folder structure or it will not be possible to run the tests for it.\nWhen trying to run ansible-test integration it will otherwise throw the following error:\n1 ERROR: The current working directory must be at or below: 2 3 - an Ansible collection: {...}/ansible_collections/{namespace}/{collection}/ 4 5 Current working directory: The collection must be really placed inside a subfolder of a folder called ansible_collections and neither namespace nor collection can contain any symbols except alphanumberics or underscores ([a-zA-Z0-9_]):\n1 ansible_collections 2 └── namespace 3 └── collection So if you want to work on an upstream collection (e.g. community.general) you should create an intermediate folder community and clone the collection into the general folder (contrary to the default checkout which would be community.general):\n1 ansible_collections 2 └── community 3 └── general Inside general you can now use run ansible-test integration to run the integration tests successfully:\n1 cd ansible_collections/community/general 2 poetry init --name community.general --dependency=ansible --dependency=pyyaml --dependency=jinja2 -n 3 poetry install 4 poetry run ansible-test integration Install kata-containers on K3S on aarch64 kubernetes raspberry To install kata-containers on a raspberry-pi and integrating it into kubernetes a few steps are currently required:\nInstall kata-containers Setup integration into containerd Setup integration into kubernetes Install kata-containers Currently the easiest (and apparently only) officially supported way to install kata-containers on an aarch64 system is to use snaps.\nIf you are using the Ubuntu arm version this is already included in the installation and you can install kata-containers with a single command4:\n1 sudo snap install kata-containers --classic Integration into containerd When running k3s there is no containerd binary as it is embedded into k3s, so configuration must be performed in the k3s configuration5.\nThe whole process includes the following steps:\nA runtime must be configured for kata-containers in containerd. shims must be created for containerd to use kata-containers. The node must be configured to be able to run kata-container workloads. The kubernetes cluster must be aware that kata is a valid runtime. To configure a runtime, the configuration file for k3s is found under: /var/lib/rancher/k3s/agent/etc/containerd/config.toml, however it can not be edited as it will be regenerated every time k3s is restarted. Instead it should be copied to /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl and that file can be modified.\n1 cp /var/lib/rancher/k3s/agent/etc/containerd/config.toml{,.tmpl} The content should be:\n1 [plugins.cri.containerd.runtimes.kata] 2 runtime_type = \"io.containerd.kata.v2\" 3 4 [kata.options] 5 ConfigPath = \"/etc/kata-containers/configuration.toml\" The configuration files for /etc/kata-containers/*.toml must be copied from the snap, because the default configuration will not be able to start on Raspberry Pis with \u003c 4GB of memory, as qemu requests too much memory by default:\n1 mkdir -p /etc/kata-containers/ 2 cp /snap/kata-containers/current/usr/share/defaults/kata-containers/*.toml /etc/kata-containers/ Inside these configuration files (depending on the Pi) make sure to adjust the value of default_memory to something the hardware can handle. You should at least adjust the default configuration.toml and configuration-qemu.toml.\nIn addition shim files must be created in /usr/local/bin to point to the shim binaries of kata-containers for containerd to pick it up.\nThe following script will create all the shims (including some that might not actually be supported) - it was copied out of the kata-deploy project.\n1 #!/bin/bash 2 shims=( 3 \"fc\" 4 \"qemu\" 5 \"qemu-virtiofs\" 6 \"clh\" 7 ) 8 9 for shim in \"${shims[@]}\"; do 10 shim_binary=\"containerd-shim-kata-${shim}-v2\" 11 shim_file=\"/usr/local/bin/${shim_binary}\" 12 shim_backup=\"/usr/local/bin/${shim_binary}.bak\" 13 14 if [ -f \"${shim_file}\" ]; then 15 echo \"warning: ${shim_binary} already exists\" \u003e\u00262 16 if [ ! -f \"${shim_backup}\" ]; then 17 mv \"${shim_file}\" \"${shim_backup}\" 18 else 19 rm \"${shim_file}\" 20 fi 21 fi 22 cat \u003c\u003c EOT | tee \"$shim_file\" 23 #!/bin/bash 24 KATA_CONF_FILE=/etc/kata-containers/configuration.toml /snap/kata-containers/current/usr/bin/containerd-shim-kata-v2 \\$@ 25 EOT 26 chmod +x \"$shim_file\" 27 done 28 29 # On the PI a default shim was also needed 30 cp /usr/local/bin/containerd-shim-kata-qemu-v2 /usr/local/bin/containerd-shim-kata-v2 Now the k3s-agent must be restarted to reload the containerd configuration and we can test that kata-container runtime is working by running the following commands:\n1 systemctl restart k3s-agent 2 ctr image pull docker.io/library/busybox:latest 3 ctr run --runtime io.containerd.run.kata.v2 -t --rm docker.io/library/busybox:latest hello sh If the tests succeed the node can now be labeled as supporting kata-containers:\n1 kubectl label node \"$NODE_NAME\" --overwrite katacontainers.io/kata-runtime=true Now as a last step a new RuntimeClass must be created for kata that can be used to force pods to be run using it:\n1 apiVersion: node.k8s.io/v1beta1 2 kind: RuntimeClass 3 metadata: 4 name: kata 5 handler: kata Now pods can use this runtime by specifying runtimeClassName inside the spec:\n1 apiVersion: v1 2 kind: Pod 3 metadata: 4 name: nginx-untrusted 5 spec: 6 runtimeClassName: kata 7 containers: 8 - name: nginx 9 image: nginx Debugging kubernetes containers kubernetes The scenario: you have a running kubernetes cluster, but suddenly some of your containers start to have problems.\nObviously now there must be a way to find out what exactly is causing these problems.\nIn this post I'll highlight two ways to debug a container running on kubernetes:\nephemeral-containers (which is likely what you should use most of the time) nsenter (which is a last resort debugging option that requires access to the node the Pod is running on) Want to follow along? Setup a test cluster and run the provided command to get your very own failing container:\n1--- 2apiVersion: v1 3kind: ConfigMap 4metadata: 5 name: myconfig 6 namespace: default 7data: 8 config.toml: | 9 [default] 10 additional_file: \"\" 11--- 12apiVersion: v1 13kind: Pod 14metadata: 15 name: my-broken-pod 16 namespace: default 17spec: 18 containers: 19 - name: working-container 20 image: gcr.io/google_containers/pause-amd64:3.0 21 - name: broken-container 22 image: quay.io/fbergman/broken-pod:latest 23 imagePullPolicy: IfNotPresent 24 resources: 25 limits: 26 memory: \"128Mi\" 27 cpu: \"500m\" 28 ports: 29 - containerPort: 3000 30 readinessProbe: 31 httpGet: 32 path: /readyz 33 port: 3000 34 volumeMounts: 35 - mountPath: /opt/ 36 name: configuration 37 volumes: 38 - name: configuration 39 configMap: 40 name: myconfig 1minikube start 2kubectl apply -f /some-web-url In this case one of the LivenessProbes starts failing.\nIn case of one container (working-container), there is no way to debug into it, because it does not contain any executable shell. This is a pretty common scenario when running minimal container images like distroless containers.\nThe other container allows spawning a shell, but is missing most utilities that would make debugging easier: there is no strace, no gdb and no default networking tools.\nHow can we now proceed to figure out what breaks the container starting?\nObviously we can hope that a kubectl describe pod or the logs of our application has some useful information, but let's say this is not the case and running kubectl logs my-broken-pod simply returns nothing useful.\nIn this case the two already mentioned approaches can be used - as it should be your first stop let's start with ephemeral containers:\nUsing ephemeral containers When having to debug a pod, ephemeral containers are the frist tool to use, because in general access to cluster nodes might not be available.\nWhen using ephemeral containers it is important to have some container images ready that contain tools you want to use for debugging.\nA very good network debugging container is the netshoot container.\nBut if all you need is a basic shell (in case of a distroless container) - busybox might already be enough.\nStarting an ephemeral container Ephemeral containers are handled as an additional field in the spec of a container: see the apidocs.\nEphemeral containers can only be added to an already running pod - trying to add them to a Pod during creation will result in an error:\n1--- 2apiVersion: v1 3kind: Pod 4metadata: 5 name: ephemeral-container-on-start 6 labels: 7 name: ephemeral-container-on-start 8spec: 9 containers: 10 - name: main-container 11 image: busybox:1.28 12 resources: 13 limits: 14 memory: \"64\" 15 cpu: \"250m\" 16 ephemeralContainers: 17 - name: debug-container 18 image: busybox:1.28 19 resources: 20 limits: 21 memory: \"64Mi\" 22 cpu: \"250m\" 1The Pod \"ephemeral-container-on-start\" is invalid: 2,* spec.ephemeralContainers[0].resources: Forbidden: cannot be set for an Ephemeral Container 3,* spec.ephemeralContainers: Forbidden: cannot be set on create That leaves two options to add an ephemeral container to a Pod:\nThe kubectl debug command:\n1kubectl debug -it [pod-name] --image=busybox:1.28 --target=[container-name] Patching the Pod using the API directly using the new resource:\n1# Just for this experiment, give the default serviceaccount all permissions 2kubectl create clusterrolebinding --clusterrole cluster-admin --serviceaccount default:default default-all-permissions 3# APIURL 4APIURL=$(kubectl config view --minify --output jsonpath=\"{.clusters[*].cluster.server}\") 5# Impersonate a serviceaccount with the required privileges 6TOKEN=$(kubectl create token default) 7# Call the API using curl as this serviceaccount 8curl --header \"Authorization: Bearer $TOKEN\" \\ 9 --header \"Content-Type: application/strategic-merge-patch+json\" \\ 10 --request PATCH \\ 11 -d ' 12{ 13 \"spec\": 14 { 15 \"ephemeralContainers\": 16 [ 17 { 18 \"name\": \"debugger\", 19 \"command\": [\"sh\"], 20 \"image\": \"busybox\", 21 \"targetContainerName\": \"broken-container\", 22 \"stdin\": true, 23 \"tty\": true, 24 \"volumeMounts\": [] 25 } 26 ] 27 } 28}' \\ 29 \"${APIURL}/api/v1/namespaces/default/pods/my-broken-pod/ephemeralcontainers\" -k Once the container has been added like that it can be used using kubectl exec -ti my-broken-pod -c debugger sh. Getting rid of the new container can be done, by killing the process that was already running when execing into the container: kill -9 .\nWhat will not work is using kubectl edit, as this is explicitly not supported:\nEphemeral containers are created using a special ephemeralcontainers handler in the API rather than by adding them directly to pod.spec, so it's not possible to add an ephemeral container using kubectl edit.\nOnce the container is launched (and you either already are inside the shell when using kubectl debug or have attached via kubectl exec) you can run whatever commands might be necessary.\nCleaning up ephemeral containers Checking the apidocs also shows what might be an issue for some user:\nEphemeral containers may not be removed or restarted.\nSo - once a ephemeral container has been added to a Pod, the only way to completely get rid of it from the Pod spec is by recreating the Pod without it.\nIt's also strongly recommended to not keep a process running in the ephemeral container, because it will work against the requests and limits of the entire pod:\nThe kubelet may evict a Pod if an ephemeral container causes the Pod to exceed its resource allocation.\nUsing nsenter Using nsenter will not only work for kubernetes pods, so this is something you can also use for docker or podman containers.\nGenerally this is useful if you want to pick-and-choose which namespaces of the container you want to access.\nIn kubernetes this will only work, if there is a way to gain access to the cluster node the Pod you want to debug is running on.\nSo either via ssh or using a openshift debug node/NODE container.\nOnce access to the node is established the process running inside the pod needs to be found: a lot of these commands depend on the container runtime in use, so for the remainder I will assume the cluster is using CRIO.6\nFind the Pod ID for our my-broken-pod pod:\n1POD_ID=$(crictl pods --name my-broken-pod -o json | jq -r '.items[] | select(.state == \"SANDBOX_READY\") | .id') Find all processes inside this pod:\n1CONTAINERS=$(crictl ps --pod d718ccb51d73896035324f6d9d9d12cc6818027ab18e5f78b295b518c62b46bd -o json | jq -r '.containers[].id') Find all processes inside these containers (or just choose the one container that is running the crashing process):\n1crictl inspect 154c67e44fcc843201aa582214395c82eb0e40acfda1ef1a9e12567f371aa13d | jq -r \".info.pid\" With the PID it is now possible to enter some of the namespaces of this process, while maintaining access to all binaries installed on the machine we SSHed to (as long as the mount namespace is not used with nsenter - indicated by the -m flag):\n1PID=1234 2nsenter -t $PID -n -p -u Often it can be useful to add namespaces incrementally to see if one of the namespaces might have an impact on the container's behaviour.\nIn this case it's now possible to inspect the process that is refusing to work with all tools available on the host - in case of a minikube cluster this includes tools like lsof and strace.\nBut first let's check if the ReadinessProbe works right now:\n1curl -I localhost:3000/readyz 1HTTP/1.1 500 Internal Server Error 2content-type: text/plain; charset=utf-8 3content-length: 7 4date: Fri, 01 Dec 2023 11:16:12 GMT So it is returning a 500 error - maybe we can get some more information what the process is actually doing using strace:\n1strace -f -p \"$PID\" 1[pid 128904] epoll_wait(3, 2[pid 128893] futex(0x7f6985695940, FUTEX_WAIT_PRIVATE, 1, NULL 3[pid 128904] \u003c... epoll_wait resumed\u003e[], 1024, 202) = 0 4[pid 128904] epoll_wait(3, [], 1024, 17) = 0 5[pid 128904] statx(AT_FDCWD, \"/opt/config/additional_file\", AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=0, ...}) = 0 6[pid 128904] write(1, \"app_state bad - configuration at\"..., 61) = 61 7[pid 128904] write(4, \"\\1\\0\\0\\0\\0\\0\\0\\0\", 8) = 8 It seems to stat a configuration file at /opt/config/additional_file - that's strange, as the configuration should live in another file (config.toml)7.\nTime to actually use the mount namespace and see what's in /opt/config\n1nsenter -t $PID -n -p -u -m 2ls /opt/config 1additional_file config.toml Well the file is there - so let's update our configuration to not contain it and see if it unbreaks our application:\n1kubectl patch -n default configmaps myconfig --type=json -p '[{\"op\": \"remove\", \"path\": \"/data/additional_file\"}]' After removing that key from the ConfigMap and a Pod restart it seems our application is finally happy!\n1my-broken-pod 2/2 Running 0 10s Obviously in this case the strace command could also have been run directly from the node, but knowing how to incrementally add container namespaces can still be useful - e.g. to check how a mounted filesystem really looks like inside the container.\nReferences Ephemeral containers (official documentation) Ephemeral containers (great blog post) nsenter man page Footnotes 1 For Ubuntu you will have to edit the file /boot/firmware/cmdline.txt and add the options cgroup_memory=1 cgroup_enable=memory at the end of the line for k3s (or containers in general) to work.\n2 See https://github.com/kubernetes/ingress-nginx/pull/3852 3 This might hopefully become easier in the future: https://github.com/ansible/ansible/issues/60215\n4 As documented here.\n5 Most information in this section is a direct extract from this PR adding k3s support to kata-deploy.\n6 If the process is easy to identify running ps and grepping for the process commandline will also work.\n7 Obviously in this example this file was mounted from the ConfigMap - in reality this might indicate problems with other software that might inject libraries into all processes via LD_PRELOAD modifications.\n",
+  "wordCount" : "3439",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Florian Bergmann"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://blog.niflheim.cc/posts/posts/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Personal blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://blog.niflheim.cc/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://blog.niflheim.cc/" accesskey="h" title="Personal blog (Alt + H)">Personal blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://blog.niflheim.cc/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://blog.niflheim.cc/posts/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      
+    </h1>
+    <div class="post-meta">Florian Bergmann
+
+</div>
+  </header> 
+  <div class="post-content"><h1 class="title">Personal blog</h1>
+
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Converting openssh private key to PEM format&#xa0;&#xa0;&#xa0;<span class="tags"><span class="tag-openssh">openssh</span></span>
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>Newer versions of the <code class="verbatim">openssh</code> will use their own format to store a private
+  key:</p>
+<div class="src src-conf">
+<pre tabindex="0"><code class="language-conf" data-lang="conf">  -----BEGIN OPENSSH PRIVATE KEY-----
+  BASE64KEYTEXT
+  -----END OPENSSH PRIVATE KEY-----</code></pre>
+</div>
+<p>
+  The traditional format of the key can sometimes be useful (or even required -
+  for example <a href="https://guacamole.apache.org/">guacamole</a> will not be able to use the <code class="verbatim">OPENSSH</code> key format).</p>
+<p>
+  To convert the key use <code class="verbatim">ssh-keygen</code>. The command will overwrite the private
+  key file, so if the original key should be preserved make sure to create a
+  backup:</p>
+<div class="src src-bash">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">  ssh-keygen -p -m PEM -f ~/.ssh/id_rsa_test</span></span></code></pre></div>
+</div>
+<div class="src src-conf">
+<pre tabindex="0"><code class="language-conf" data-lang="conf">  -----BEGIN RSA PRIVATE KEY-----
+  BASE64KEYTEXT
+  -----END RSA PRIVATE KEY-----</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+Deploying Teamspeak on a Raspberry PI kubernetes cluster&#xa0;&#xa0;&#xa0;<span class="tags"><span class="tag-kubernetes">kubernetes</span>&#xa0;<span class="tag-arm">arm</span>&#xa0;<span class="tag-raspberry">raspberry</span></span>
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<p>CLOSED: [2020-05-08 Fri 22:59]</p>
+<p>While this post will end up with a running <a href="https://www.teamspeak.com/en/">Teamspeak</a> server, it is very hard
+  on the resources of the Raspberry Pi and might not be suitable for everyday
+  use.</p>
+<p>
+  To deploy a teamspeak server on raspberry pi a few things need to be done:</p>
+<ul>
+<li>(optional) Get a Kubernetes cluster up and running (this is not required, if
+you just want to run the <code class="verbatim">docker</code> container directly).</li>
+<li>Get Teamspeak to run on <code class="verbatim">ARM</code>.</li>
+<li>Setup an ingress controller to make the Teamspeak server accessible from the
+outside world (in this case this will be the <a href="https://kubernetes.github.io/ingress-nginx/">Nginx Ingress</a>).</li>
+</ul>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+Setting up a kubernetes cluster  
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>To setup a kubernetes cluster on Raspberry Pis <a href="https://k3s.io/">K3S</a> is very good approach, as
+   the cluster will be more lightweight that simply installing upstream
+   kubernetes.</p>
+<p>
+   As a base I recommend using <a href="https://blog.hypriot.com/">HypriotOS</a> or <a href="https://ubuntu.com/download/server/arm">Ubuntu Server</a><sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup> as those allow
+   configuring the images using <a href="https://cloudinit.readthedocs.io/en/latest/">Cloud-Init</a>.</p>
+<p>
+   Make sure to follow the instructions to use the the <code class="verbatim">legacy</code> backend for
+   <code class="verbatim">iptables</code> if installing <code class="verbatim">kubernetes</code> v1.17 or lower: <a href="https://v1-17.docs.kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#ensure-iptables-tooling-does-not-use-the-nftables-backend">kubeadm instructions</a>.</p>
+<p>
+   When installing <code class="verbatim">k3s</code> to run <code class="verbatim">Teamspeak</code> <code class="verbatim">Traefik</code> should not be installed,
+   as only the 2.x version supports <code class="verbatim">UDP</code> ingresses - so instead <code class="verbatim">nginx-ingress</code>
+   will be installed later:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  curl -sfL https://get.k3s.io <span class="p">|</span> sh -s - --no-deploy<span class="o">=</span>traefik</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+Deploy Teamspeak
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<div id="outline-container-headline-5" class="outline-4">
+<h4 id="headline-5">
+Build an ARM image for Teamspeak
+</h4>
+<div id="outline-text-headline-5" class="outline-text-4">
+<p>Teamspeak does not provide a binary for <code class="verbatim">ARM</code>.</p>
+<p>
+    It is however possible to run it using <a href="https://www.qemu.org/">Qemu</a> - I have already prepared an
+    <code class="verbatim">ARM</code> image that will run the Teamspeak server through <code class="verbatim">qemu</code> that you can
+    find on my <a href="https://hub.docker.com/repository/docker/monadt/teamspeak3-server">Dockerhub</a> - or if you want to see the source checkout the
+    repository on <a href="https://github.com/bergmannf/teamspeak3-server-arm">Github</a>.</p>
+<p>
+    The image is using the same <code class="verbatim">entrypoint.sh</code> as the <a href="https://hub.docker.com/_/teamspeak">official image</a> - so if
+    you are already using that one you should be able to use it exactly the same
+    way (if not - feel free to open an issue).</p>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-4">
+<h4 id="headline-6">
+Deploy the image
+</h4>
+<div id="outline-text-headline-6" class="outline-text-4">
+<p>Now - if you do not want to use <code class="verbatim">kubernetes</code>, you can simply use the image
+    using <code class="verbatim">docker</code> and expose the required <code class="verbatim">Teamspeak</code> ports as you would with
+    <code class="verbatim">docker</code>:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  docker run -p 9987:9987/udp -p 10011:10011 -p 30033:30033 -e <span class="nv">TS3SERVER_LICENSE</span><span class="o">=</span>accept monadt/teamspeak3-server</span></span></code></pre></div>
+</div>
+<p>
+    This way is a lot easier on the resources and will likely run more reliable
+    on a Raspberry PI with &lt; 2 GB of RAM.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+Setup nginx-ingress 
+</h3>
+<div id="outline-text-headline-7" class="outline-text-3">
+<div id="outline-container-headline-8" class="outline-4">
+<h4 id="headline-8">
+Get nginx-ingress to run on ARM
+</h4>
+<div id="outline-text-headline-8" class="outline-text-4">
+<p>Setting up the <code class="verbatim">nginx-ingress</code> on a cluster running on <code class="verbatim">ARM</code> needs a few extra
+   steps when using the <a href="https://kubernetes.github.io/ingress-nginx/deploy/">official documentation</a>.</p>
+<p>
+   The images used in the <code class="verbatim">manifests</code> are not compatible with <code class="verbatim">armv7</code> (that is
+   used when running a cluster on a bunch of Raspberry Pis).</p>
+<p>
+   First the <code class="verbatim">mandatory.yaml</code> has to be updated to use the images for the <code class="verbatim">arm</code>
+   architecture<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup>:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  sed -i <span class="s1">&#39;s/nginx-ingress-controller:0/nginx-ingress-controller-arm:0/&#39;</span> mandatory.yaml</span></span></code></pre></div>
+</div>
+<p>
+   The resulting <code class="verbatim">mandatory.yaml</code> file can now be applied to the cluster:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  kubectl apply -f mandatory.yaml</span></span></code></pre></div>
+</div>
+<p>
+   In my local cluster I am using the <code class="verbatim">NodePort</code> approach, so the service for
+   that can be applied next:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/provider/baremetal/service-nodeport.yaml</span></span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-3">
+<h3 id="headline-9">
+Setup a Teamspeak deployment
+</h3>
+<div id="outline-text-headline-9" class="outline-text-3">
+<p>With all pieces in place the <code class="verbatim">Teamspeak</code> container can now be deployed onto
+   the cluster:</p>
+<p>
+   Save the following <code class="verbatim">yaml</code> into a file (e.g. <code class="verbatim">teamspeak.yaml</code>).</p>
+<div class="src src-yaml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="w">  </span>---<span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">  </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Namespace</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">  </span>---<span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">  </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PersistentVolumeClaim</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak-pvc</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">  </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">    </span><span class="nt">accessModes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">      </span>- <span class="l">ReadWriteOnce</span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">    </span><span class="nt">storageClassName</span><span class="p">:</span><span class="w"> </span><span class="l">local-path</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w">      </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w">        </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">256Mi</span><span class="w">
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w">  </span>---<span class="w">
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w">  </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak-deployment</span><span class="w">
+</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak</span><span class="w">
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="w">    </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak</span><span class="w">
+</span></span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="w">  </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="w">    </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="w">    </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="w">      </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">31</span><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak</span><span class="w">
+</span></span></span><span class="line"><span class="ln">32</span><span class="cl"><span class="w">    </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">33</span><span class="cl"><span class="w">      </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">34</span><span class="cl"><span class="w">        </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak</span><span class="w">
+</span></span></span><span class="line"><span class="ln">35</span><span class="cl"><span class="w">        </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">36</span><span class="cl"><span class="w">          </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak</span><span class="w">
+</span></span></span><span class="line"><span class="ln">37</span><span class="cl"><span class="w">      </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">38</span><span class="cl"><span class="w">        </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">39</span><span class="cl"><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak-server</span><span class="w">
+</span></span></span><span class="line"><span class="ln">40</span><span class="cl"><span class="w">            </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">monadt/teamspeak3-server:3.11.0</span><span class="w">
+</span></span></span><span class="line"><span class="ln">41</span><span class="cl"><span class="w">            </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">42</span><span class="cl"><span class="w">              </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ts</span><span class="w">
+</span></span></span><span class="line"><span class="ln">43</span><span class="cl"><span class="w">                </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">9987</span><span class="w">
+</span></span></span><span class="line"><span class="ln">44</span><span class="cl"><span class="w">                </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">UDP</span><span class="w">
+</span></span></span><span class="line"><span class="ln">45</span><span class="cl"><span class="w">            </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">46</span><span class="cl"><span class="w">            </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">47</span><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">TS3SERVER_LICENSE</span><span class="w">
+</span></span></span><span class="line"><span class="ln">48</span><span class="cl"><span class="w">              </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">accept</span><span class="w">
+</span></span></span><span class="line"><span class="ln">49</span><span class="cl"><span class="w">            </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">50</span><span class="cl"><span class="w">            </span>- <span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/var/ts3server/</span><span class="w">
+</span></span></span><span class="line"><span class="ln">51</span><span class="cl"><span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak-data</span><span class="w">
+</span></span></span><span class="line"><span class="ln">52</span><span class="cl"><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">53</span><span class="cl"><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak-data</span><span class="w">
+</span></span></span><span class="line"><span class="ln">54</span><span class="cl"><span class="w">            </span><span class="nt">persistentVolumeClaim</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">55</span><span class="cl"><span class="w">              </span><span class="nt">claimName</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak-pvc</span><span class="w">
+</span></span></span><span class="line"><span class="ln">56</span><span class="cl"><span class="w">  </span>---<span class="w">
+</span></span></span><span class="line"><span class="ln">57</span><span class="cl"><span class="w">  </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="ln">58</span><span class="cl"><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="ln">59</span><span class="cl"><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">60</span><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak-service</span><span class="w">
+</span></span></span><span class="line"><span class="ln">61</span><span class="cl"><span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak</span><span class="w">
+</span></span></span><span class="line"><span class="ln">62</span><span class="cl"><span class="w">    </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">63</span><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak</span><span class="w">
+</span></span></span><span class="line"><span class="ln">64</span><span class="cl"><span class="w">  </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">65</span><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterIP</span><span class="w">
+</span></span></span><span class="line"><span class="ln">66</span><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">67</span><span class="cl"><span class="w">      </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">9987</span><span class="w">
+</span></span></span><span class="line"><span class="ln">68</span><span class="cl"><span class="w">        </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l">ts</span><span class="w">
+</span></span></span><span class="line"><span class="ln">69</span><span class="cl"><span class="w">        </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">UDP</span><span class="w">
+</span></span></span><span class="line"><span class="ln">70</span><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ts</span><span class="w">
+</span></span></span><span class="line"><span class="ln">71</span><span class="cl"><span class="w">    </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">72</span><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak</span><span class="w">
+</span></span></span><span class="line"><span class="ln">73</span><span class="cl"><span class="w">  </span>---<span class="w">
+</span></span></span><span class="line"><span class="ln">74</span><span class="cl"><span class="w">  </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="ln">75</span><span class="cl"><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ConfigMap</span><span class="w">
+</span></span></span><span class="line"><span class="ln">76</span><span class="cl"><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">77</span><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">udp-services</span><span class="w">
+</span></span></span><span class="line"><span class="ln">78</span><span class="cl"><span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">ingress-nginx</span><span class="w">
+</span></span></span><span class="line"><span class="ln">79</span><span class="cl"><span class="w">  </span><span class="nt">data</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">80</span><span class="cl"><span class="w">    </span><span class="nt">9987</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;teamspeak/teamspeak-service:9987&#34;</span></span></span></code></pre></div>
+</div>
+<p>
+   Apply this using <code class="verbatim">kubectl</code>:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  kubectl apply -f teamspeak.yaml</span></span></code></pre></div>
+</div>
+<p>
+   The 9987 <code class="verbatim">udp</code> port will also need to be added to the <code class="verbatim">ingress</code> service.
+   In the <code class="verbatim">ports</code> section of the service add the following snippet:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  kubectl edit svc ingress-nginx -n ingress-nginx</span></span></code></pre></div>
+</div>
+<div class="src src-yaml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="ln">1</span><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">teamspeak</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">9987</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">UDP</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">9987</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-3">
+<h3 id="headline-10">
+Forwarding traffic to the ingress
+</h3>
+<div id="outline-text-headline-10" class="outline-text-3">
+<p>The final step depends a lot on the setup you are deploying the cluster in.</p>
+<p>
+   If it is behind your local router, you have to check which port was bound to
+   the 9987 <code class="verbatim">udp</code> port and forward this to one of your cluster-nodes:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  kubectl describe svc ingress-nginx -n ingress-nginx</span></span></code></pre></div>
+</div>
+<div class="src src-text">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="ln"> 1</span><span class="cl">  Name:                     ingress-nginx
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  Namespace:                ingress-nginx
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">  Labels:                   app.kubernetes.io/name=ingress-nginx
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">                            app.kubernetes.io/part-of=ingress-nginx
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">  Annotations:              Selector:  app.kubernetes.io/name=ingress-nginx,app.kubernetes.io/part-of=ingress-nginx
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">  Type:                     NodePort
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">  IP:                       10.43.33.70
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">  Port:                     http  80/TCP
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">  TargetPort:               80/TCP
+</span></span><span class="line"><span class="ln">10</span><span class="cl">  NodePort:                 http  32224/TCP
+</span></span><span class="line"><span class="ln">11</span><span class="cl">  Endpoints:                
+</span></span><span class="line"><span class="ln">12</span><span class="cl">  Port:                     https  443/TCP
+</span></span><span class="line"><span class="ln">13</span><span class="cl">  TargetPort:               443/TCP
+</span></span><span class="line"><span class="ln">14</span><span class="cl">  NodePort:                 https  31955/TCP
+</span></span><span class="line"><span class="ln">15</span><span class="cl">  Endpoints:                
+</span></span><span class="line"><span class="ln">16</span><span class="cl">  Port:                     teamspeak  9987/UDP
+</span></span><span class="line"><span class="ln">17</span><span class="cl">  TargetPort:               9987/UDP
+</span></span><span class="line"><span class="ln">18</span><span class="cl">  NodePort:                 teamspeak  31222/UDP
+</span></span><span class="line"><span class="ln">19</span><span class="cl">  Endpoints:                
+</span></span><span class="line"><span class="ln">20</span><span class="cl">  Session Affinity:         None
+</span></span><span class="line"><span class="ln">21</span><span class="cl">  External Traffic Policy:  Cluster
+</span></span><span class="line"><span class="ln">22</span><span class="cl">  Events:                   &lt;none&gt;</span></span></code></pre></div>
+</div>
+<p>
+   In this case the port that needs to be forwarded is the <code class="verbatim">31222</code> port (the
+   <code class="verbatim">NodePort</code> for the 9987 <code class="verbatim">UDP</code> port).</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-11" class="outline-2">
+<h2 id="headline-11">
+Testing an ansible collection&#xa0;&#xa0;&#xa0;<span class="tags"><span class="tag-ansible">ansible</span></span>
+</h2>
+<div id="outline-text-headline-11" class="outline-text-2">
+<p>When wanting to work on a collection for <code class="verbatim">ansible</code> it is (for now<sup class="footnote-reference"><a id="footnote-reference-3" href="#footnote-3">3</a></sup>) important
+  to check it out in a very specific folder structure or it will not be possible
+  to run the tests for it.</p>
+<p>
+  When trying to run <code class="verbatim">ansible-test integration</code> it will otherwise throw the
+  following error:</p>
+<div class="src src-text">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="ln">1</span><span class="cl">  ERROR: The current working directory must be at or below:
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl">   - an Ansible collection: {...}/ansible_collections/{namespace}/{collection}/
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl">  Current working directory: &lt;some_other_dir&gt;</span></span></code></pre></div>
+</div>
+<p>
+  The collection must be really placed inside a <code class="verbatim">subfolder</code> of a folder called
+  <code class="verbatim">ansible_collections</code> and neither <code class="verbatim">namespace</code> nor <code class="verbatim">collection</code> can contain
+  any symbols except <code class="verbatim">alphanumberics</code> or <code class="verbatim">underscores</code> (<code class="verbatim">[a-zA-Z0-9_]</code>):</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  ansible_collections
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  └── namespace
+</span></span><span class="line"><span class="ln">3</span><span class="cl">      └── collection</span></span></code></pre></div>
+</div>
+<p>
+  So if you want to work on an upstream collection (e.g. <a href="https://github.com/ansible-collections/community.general">community.general</a>) you
+  should create an intermediate folder <code class="verbatim">community</code> and clone the collection into
+  the <code class="verbatim">general</code> folder (contrary to the default checkout which would be
+  <code class="verbatim">community.general</code>):</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  ansible_collections
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  └── community
+</span></span><span class="line"><span class="ln">3</span><span class="cl">      └── general</span></span></code></pre></div>
+</div>
+<p>
+  Inside <code class="verbatim">general</code> you can now use run <code class="verbatim">ansible-test integration</code> to run
+  the integration tests successfully:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  <span class="nb">cd</span> ansible_collections/community/general
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  poetry init --name community.general --dependency<span class="o">=</span>ansible --dependency<span class="o">=</span>pyyaml --dependency<span class="o">=</span>jinja2 -n
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  poetry install
+</span></span><span class="line"><span class="ln">4</span><span class="cl">  poetry run ansible-test integration</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-12" class="outline-2">
+<h2 id="headline-12">
+Install kata-containers on K3S on aarch64&#xa0;&#xa0;&#xa0;<span class="tags"><span class="tag-kubernetes">kubernetes</span>&#xa0;<span class="tag-raspberry">raspberry</span></span>
+</h2>
+<div id="outline-text-headline-12" class="outline-text-2">
+<p>To install <code class="verbatim">kata-containers</code> on a <code class="verbatim">raspberry-pi</code> and integrating it into
+  <code class="verbatim">kubernetes</code> a few steps are currently required:</p>
+<ul>
+<li>Install <code class="verbatim">kata-containers</code></li>
+<li>Setup integration into <code class="verbatim">containerd</code></li>
+<li>Setup integration into <code class="verbatim">kubernetes</code></li>
+</ul>
+<div id="outline-container-headline-13" class="outline-3">
+<h3 id="headline-13">
+Install <code class="verbatim">kata-containers</code>
+</h3>
+<div id="outline-text-headline-13" class="outline-text-3">
+<p>Currently the easiest (and apparently only) officially supported way to
+   install <code class="verbatim">kata-containers</code> on an <code class="verbatim">aarch64</code> system is to use <code class="verbatim">snaps</code>.</p>
+<p>
+   If you are using the <code class="verbatim">Ubuntu</code> <code class="verbatim">arm</code> version this is already included in the
+   installation and you can install <code class="verbatim">kata-containers</code> with a single command<sup class="footnote-reference"><a id="footnote-reference-4" href="#footnote-4">4</a></sup>:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  sudo snap install kata-containers --classic</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-14" class="outline-3">
+<h3 id="headline-14">
+Integration into containerd
+</h3>
+<div id="outline-text-headline-14" class="outline-text-3">
+<p>When running <code class="verbatim">k3s</code> there is no <code class="verbatim">containerd</code> binary as it is embedded into
+   <code class="verbatim">k3s</code>, so configuration must be performed in the <code class="verbatim">k3s</code> configuration<sup class="footnote-reference"><a id="footnote-reference-5" href="#footnote-5">5</a></sup>.</p>
+<p>
+   The whole process includes the following steps:</p>
+<ul>
+<li>A <code class="verbatim">runtime</code> must be configured for <code class="verbatim">kata-containers</code> in <code class="verbatim">containerd</code>.</li>
+<li><code class="verbatim">shims</code> must be created for <code class="verbatim">containerd</code> to use <code class="verbatim">kata-containers</code>.</li>
+<li>The node must be configured to be able to run <code class="verbatim">kata-container</code> workloads.</li>
+<li>The kubernetes cluster must be aware that <code class="verbatim">kata</code> is a valid runtime.</li>
+</ul>
+<p>To configure a <code class="verbatim">runtime</code>, the configuration file for <code class="verbatim">k3s</code> is found under:
+   <code class="verbatim">/var/lib/rancher/k3s/agent/etc/containerd/config.toml</code>, however it can not
+   be edited as it will be regenerated every time <code class="verbatim">k3s</code> is restarted. Instead it
+   <a href="https://rancher.com/docs/k3s/latest/en/advanced/">should be copied</a> to
+   <code class="verbatim">/var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl</code> and that file
+   can be modified.</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  cp /var/lib/rancher/k3s/agent/etc/containerd/config.toml<span class="o">{</span>,.tmpl<span class="o">}</span></span></span></code></pre></div>
+</div>
+<p>
+   The content should be:</p>
+<div class="src src-toml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="ln">1</span><span class="cl">  <span class="p">[</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">cri</span><span class="p">.</span><span class="nx">containerd</span><span class="p">.</span><span class="nx">runtimes</span><span class="p">.</span><span class="nx">kata</span><span class="p">]</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="nx">runtime_type</span> <span class="p">=</span> <span class="s2">&#34;io.containerd.kata.v2&#34;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">
+</span></span><span class="line"><span class="ln">4</span><span class="cl">  <span class="p">[</span><span class="nx">kata</span><span class="p">.</span><span class="nx">options</span><span class="p">]</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="nx">ConfigPath</span> <span class="p">=</span> <span class="s2">&#34;/etc/kata-containers/configuration.toml&#34;</span></span></span></code></pre></div>
+</div>
+<p>
+   The configuration files for <code class="verbatim">/etc/kata-containers/*.toml</code> must be copied from
+   the snap, because the default configuration will not be able to start on
+   Raspberry Pis with &lt; 4GB of memory, as <code class="verbatim">qemu</code> requests too much memory by
+   default:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  mkdir -p /etc/kata-containers/
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  cp /snap/kata-containers/current/usr/share/defaults/kata-containers/*.toml /etc/kata-containers/</span></span></code></pre></div>
+</div>
+<p>
+   Inside these configuration files (depending on the Pi) make sure to adjust the
+   value of <code class="verbatim">default_memory</code> to something the hardware can handle. You should at
+   least adjust the default <code class="verbatim">configuration.toml</code> and <code class="verbatim">configuration-qemu.toml</code>.</p>
+<p>
+   In addition <code class="verbatim">shim</code> files must be created in <code class="verbatim">/usr/local/bin</code> to point to the
+   <code class="verbatim">shim</code> binaries of <code class="verbatim">kata-containers</code> for <code class="verbatim">containerd</code> to pick it up.</p>
+<p>
+   The following script will create all the shims (including some that might not
+   actually be supported) - it was copied out of the <code class="verbatim">kata-deploy</code> project.</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln"> 1</span><span class="cl">  <span class="c1">#!/bin/bash</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  <span class="nv">shims</span><span class="o">=(</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">      <span class="s2">&#34;fc&#34;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">      <span class="s2">&#34;qemu&#34;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">      <span class="s2">&#34;qemu-virtiofs&#34;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">      <span class="s2">&#34;clh&#34;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">  <span class="o">)</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">  <span class="k">for</span> shim in <span class="s2">&#34;</span><span class="si">${</span><span class="nv">shims</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">      <span class="nv">shim_binary</span><span class="o">=</span><span class="s2">&#34;containerd-shim-kata-</span><span class="si">${</span><span class="nv">shim</span><span class="si">}</span><span class="s2">-v2&#34;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">      <span class="nv">shim_file</span><span class="o">=</span><span class="s2">&#34;/usr/local/bin/</span><span class="si">${</span><span class="nv">shim_binary</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">      <span class="nv">shim_backup</span><span class="o">=</span><span class="s2">&#34;/usr/local/bin/</span><span class="si">${</span><span class="nv">shim_binary</span><span class="si">}</span><span class="s2">.bak&#34;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">
+</span></span><span class="line"><span class="ln">14</span><span class="cl">      <span class="k">if</span> <span class="o">[</span> -f <span class="s2">&#34;</span><span class="si">${</span><span class="nv">shim_file</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">          <span class="nb">echo</span> <span class="s2">&#34;warning: </span><span class="si">${</span><span class="nv">shim_binary</span><span class="si">}</span><span class="s2"> already exists&#34;</span> &gt;<span class="p">&amp;</span><span class="m">2</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">          <span class="k">if</span> <span class="o">[</span> ! -f <span class="s2">&#34;</span><span class="si">${</span><span class="nv">shim_backup</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">              mv <span class="s2">&#34;</span><span class="si">${</span><span class="nv">shim_file</span><span class="si">}</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">shim_backup</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">          <span class="k">else</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">              rm <span class="s2">&#34;</span><span class="si">${</span><span class="nv">shim_file</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">          <span class="k">fi</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">      <span class="k">fi</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">      cat <span class="s">&lt;&lt; EOT | tee &#34;$shim_file&#34;
+</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="s">  #!/bin/bash
+</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="s">  KATA_CONF_FILE=/etc/kata-containers/configuration.toml /snap/kata-containers/current/usr/bin/containerd-shim-kata-v2 \$@
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="s">  EOT</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">      chmod +x <span class="s2">&#34;</span><span class="nv">$shim_file</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">  <span class="k">done</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">
+</span></span><span class="line"><span class="ln">29</span><span class="cl">  <span class="c1"># On the PI a default shim was also needed</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">  cp /usr/local/bin/containerd-shim-kata-qemu-v2 /usr/local/bin/containerd-shim-kata-v2</span></span></code></pre></div>
+</div>
+<p>
+   Now the <code class="verbatim">k3s-agent</code> must be restarted to reload the <code class="verbatim">containerd</code>
+   configuration and we can test that kata-container runtime is working by
+   running the following commands:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  systemctl restart k3s-agent
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  ctr image pull docker.io/library/busybox:latest
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  ctr run --runtime io.containerd.run.kata.v2 -t --rm docker.io/library/busybox:latest hello sh</span></span></code></pre></div>
+</div>
+<p>
+   If the tests succeed the node can now be labeled as supporting <code class="verbatim">kata-containers</code>:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">  kubectl label node <span class="s2">&#34;</span><span class="nv">$NODE_NAME</span><span class="s2">&#34;</span> --overwrite katacontainers.io/kata-runtime<span class="o">=</span>true</span></span></code></pre></div>
+</div>
+<p>
+   Now as a last step a new <a href="https://kubernetes.io/docs/concepts/containers/runtime-class/">RuntimeClass</a> must be created for <code class="verbatim">kata</code> that can be
+   used to force pods to be run using it:</p>
+<div class="src src-yaml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="ln">1</span><span class="cl"><span class="w">  </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">node.k8s.io/v1beta1</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">RuntimeClass</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kata</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">  </span><span class="nt">handler</span><span class="p">:</span><span class="w"> </span><span class="l">kata</span></span></span></code></pre></div>
+</div>
+<p>
+   Now pods can use this runtime by specifying <code class="verbatim">runtimeClassName</code> inside the <code class="verbatim">spec</code>:</p>
+<div class="src src-yaml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="ln">1</span><span class="cl"><span class="w">  </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">  </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx-untrusted</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">  </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">    </span><span class="nt">runtimeClassName</span><span class="p">:</span><span class="w"> </span><span class="l">kata</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w">    </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-15" class="outline-2">
+<h2 id="headline-15">
+Debugging kubernetes containers&#xa0;&#xa0;&#xa0;<span class="tags"><span class="tag-kubernetes">kubernetes</span></span>
+</h2>
+<div id="outline-text-headline-15" class="outline-text-2">
+<p>
+The scenario: you have a running kubernetes cluster, but suddenly some of your
+containers start to have problems.</p>
+<p>
+Obviously now there must be a way to find out what exactly is causing these
+problems.</p>
+<p>
+In this post I&#39;ll highlight two ways to debug a container running on kubernetes:</p>
+<ul>
+<li><code class="verbatim">ephemeral-containers</code> (which is likely what you should use most of the time)</li>
+<li><code class="verbatim">nsenter</code> (which is a last resort debugging option that requires access to the
+node the Pod is running on)</li>
+</ul>
+<blockquote>
+<p>Want to follow along? Setup a test cluster and run the provided command to get
+your very own failing container:</p>
+<div class="src src-yaml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ConfigMap</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">myconfig</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">default</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w"></span><span class="nt">data</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">  </span><span class="nt">config.toml</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="sd">    [default]</span><span class="w">    
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">  </span><span class="nt">additional_file</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-broken-pod</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">default</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">working-container</span><span class="w">
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">gcr.io/google_containers/pause-amd64:3.0</span><span class="w">
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">broken-container</span><span class="w">
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">quay.io/fbergman/broken-pod:latest</span><span class="w">
+</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="w">    </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">IfNotPresent</span><span class="w">
+</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="w">      </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="w">        </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;128Mi&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;500m&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="w">      </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="w">    </span><span class="nt">readinessProbe</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">31</span><span class="cl"><span class="w">      </span><span class="nt">httpGet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">32</span><span class="cl"><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/readyz</span><span class="w">
+</span></span></span><span class="line"><span class="ln">33</span><span class="cl"><span class="w">        </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></span></span><span class="line"><span class="ln">34</span><span class="cl"><span class="w">    </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">35</span><span class="cl"><span class="w">      </span>- <span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/opt/</span><span class="w">
+</span></span></span><span class="line"><span class="ln">36</span><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">configuration</span><span class="w">
+</span></span></span><span class="line"><span class="ln">37</span><span class="cl"><span class="w">  </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">38</span><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">configuration</span><span class="w">
+</span></span></span><span class="line"><span class="ln">39</span><span class="cl"><span class="w">      </span><span class="nt">configMap</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">40</span><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">myconfig</span></span></span></code></pre></div>
+</div>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">minikube start
+</span></span><span class="line"><span class="ln">2</span><span class="cl">kubectl apply -f /some-web-url</span></span></code></pre></div>
+</div>
+</blockquote>
+<p>
+In this case one of the <code class="verbatim">LivenessProbes</code> starts failing.</p>
+<p>
+In case of one container (<code class="verbatim">working-container</code>), there is no way to debug into
+it, because it does not contain any executable shell. This is a pretty common
+scenario when running minimal container images like <a href="https://github.com/GoogleContainerTools/distroless">distroless</a> containers.</p>
+<p>
+The other container allows spawning a shell, but is missing most utilities that
+would make debugging easier: there is no <code class="verbatim">strace</code>, no <code class="verbatim">gdb</code> and no default
+networking tools.</p>
+<p>
+How can we now proceed to figure out what breaks the container starting?</p>
+<p>
+Obviously we can hope that a <code class="verbatim">kubectl describe pod</code> or the logs of our
+application has some useful information, but let&#39;s say this is not the case and
+running <code class="verbatim">kubectl logs my-broken-pod</code> simply returns nothing useful.</p>
+<p>
+In this case the two already mentioned approaches can be used - as it should be
+your first stop let&#39;s start with <strong>ephemeral containers</strong>:</p>
+<div id="outline-container-headline-16" class="outline-3">
+<h3 id="headline-16">
+Using ephemeral containers
+</h3>
+<div id="outline-text-headline-16" class="outline-text-3">
+<p>When having to debug a pod, ephemeral containers are the frist tool to use,
+because in general access to cluster nodes might not be available.</p>
+<p>
+When using ephemeral containers it is important to have some container images
+ready that contain tools you want to use for debugging.</p>
+<p>
+A very good network debugging container is the <a href="https://github.com/nicolaka/netshoot">netshoot</a> container.</p>
+<p>
+But if all you need is a basic shell (in case of a distroless container) -
+busybox might already be enough.</p>
+<div id="outline-container-headline-17" class="outline-4">
+<h4 id="headline-17">
+Starting an ephemeral container
+</h4>
+<div id="outline-text-headline-17" class="outline-text-4">
+<p>Ephemeral containers are handled as an additional field in the <code class="verbatim">spec</code> of a
+container: <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#ephemeralcontainer-v1-core">see the apidocs</a>.</p>
+<p>
+Ephemeral containers can only be added to an already running pod - trying to add
+them to a Pod during creation will result in an error:</p>
+<div class="src src-yaml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ephemeral-container-on-start</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ephemeral-container-on-start</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">main-container</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">busybox:1.28</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">      </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">        </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;64&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;250m&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w">  </span><span class="nt">ephemeralContainers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">debug-container</span><span class="w">
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">busybox:1.28</span><span class="w">
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w">      </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="w">        </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;64Mi&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;250m&#34;</span></span></span></code></pre></div>
+</div>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">The Pod <span class="s2">&#34;ephemeral-container-on-start&#34;</span> is invalid:
+</span></span><span class="line"><span class="ln">2</span><span class="cl">,* spec.ephemeralContainers<span class="o">[</span>0<span class="o">]</span>.resources: Forbidden: cannot be <span class="nb">set</span> <span class="k">for</span> an Ephemeral Container
+</span></span><span class="line"><span class="ln">3</span><span class="cl">,* spec.ephemeralContainers: Forbidden: cannot be <span class="nb">set</span> on create</span></span></code></pre></div>
+</div>
+<p>
+That leaves two options to add an ephemeral container to a Pod:</p>
+<ol>
+<li>
+<p>The <code class="verbatim">kubectl debug</code> command:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">kubectl debug -it <span class="o">[</span>pod-name<span class="o">]</span> --image<span class="o">=</span>busybox:1.28 --target<span class="o">=[</span>container-name<span class="o">]</span></span></span></code></pre></div>
+</div>
+</li>
+<li>
+<p>Patching the Pod using the API directly using the new resource:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1"># Just for this experiment, give the default serviceaccount all permissions</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">kubectl create clusterrolebinding --clusterrole cluster-admin --serviceaccount default:default default-all-permissions
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1"># APIURL</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="nv">APIURL</span><span class="o">=</span><span class="k">$(</span>kubectl config view --minify --output <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.clusters[*].cluster.server}&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1"># Impersonate a serviceaccount with the required privileges</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="nv">TOKEN</span><span class="o">=</span><span class="k">$(</span>kubectl create token default<span class="k">)</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="c1"># Call the API using curl as this serviceaccount</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">curl --header <span class="s2">&#34;Authorization: Bearer </span><span class="nv">$TOKEN</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="se"></span> --header <span class="s2">&#34;Content-Type: application/strategic-merge-patch+json&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="se"></span> --request PATCH <span class="se">\
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="se"></span> -d <span class="s1">&#39;
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="s1">{
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="s1"> &#34;spec&#34;:
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="s1"> {
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="s1">     &#34;ephemeralContainers&#34;:
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="s1">     [
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="s1">         {
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="s1">             &#34;name&#34;: &#34;debugger&#34;,
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="s1">             &#34;command&#34;: [&#34;sh&#34;],
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="s1">             &#34;image&#34;: &#34;busybox&#34;,
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="s1">             &#34;targetContainerName&#34;: &#34;broken-container&#34;,
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="s1">             &#34;stdin&#34;: true,
+</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="s1">             &#34;tty&#34;: true,
+</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="s1">             &#34;volumeMounts&#34;: []
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="s1">         }
+</span></span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="s1">     ]
+</span></span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="s1"> }
+</span></span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="s1">}&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="se"></span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">APIURL</span><span class="si">}</span><span class="s2">/api/v1/namespaces/default/pods/my-broken-pod/ephemeralcontainers&#34;</span> -k</span></span></code></pre></div>
+</div>
+<p>
+Once the container has been added like that it can be used using <code class="verbatim">kubectl
+exec -ti my-broken-pod -c debugger sh</code>. Getting rid of the new container can
+be done, by killing the process that was already running when <code class="verbatim">execing</code> into
+the container: <code class="verbatim">kill -9 &lt;pid_of_initial_sh&gt;</code>.</p>
+</li>
+</ol>
+<p>What will not work is using <code class="verbatim">kubectl edit</code>, as this is <a href="https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/#what-is-an-ephemeral-container">explicitly not supported</a>:</p>
+<blockquote>
+<p>Ephemeral containers are created using a special ephemeralcontainers handler in the API rather than by adding them directly to pod.spec, so it&#39;s not possible to add an ephemeral container using kubectl edit.</p>
+</blockquote>
+<p>
+Once the container is launched (and you either already are inside the shell when
+using <code class="verbatim">kubectl debug</code> or have attached via <code class="verbatim">kubectl exec</code>) you can run whatever
+commands might be necessary.</p>
+</div>
+</div>
+<div id="outline-container-headline-18" class="outline-4">
+<h4 id="headline-18">
+Cleaning up ephemeral containers
+</h4>
+<div id="outline-text-headline-18" class="outline-text-4">
+<p>Checking the apidocs also shows what might be an issue for some user:</p>
+<blockquote>
+<p>Ephemeral containers may not be removed or restarted.</p>
+</blockquote>
+<p>
+So - once a ephemeral container has been added to a Pod, the only way to
+completely get rid of it from the Pod spec is by recreating the Pod without it.</p>
+<p>
+It&#39;s also strongly recommended to not keep a process running in the ephemeral
+container, because it will work against the requests and limits of the entire
+pod:</p>
+<blockquote>
+<p>The kubelet may evict a Pod if an ephemeral container causes the Pod to exceed its resource allocation.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-19" class="outline-3">
+<h3 id="headline-19">
+Using nsenter
+</h3>
+<div id="outline-text-headline-19" class="outline-text-3">
+<p>Using <code class="verbatim">nsenter</code> will not only work for kubernetes pods, so this is something you
+can also use for <code class="verbatim">docker</code> or <code class="verbatim">podman</code> containers.</p>
+<p>
+Generally this is useful if you want to pick-and-choose which <strong>namespaces</strong> of
+the container you want to access.</p>
+<blockquote>
+<p>In kubernetes this will only work, if there is a way to gain access to the
+cluster node the Pod you want to debug is running on.</p>
+<p>
+So either via <code class="verbatim">ssh</code> or using a <a href="https://www.redhat.com/sysadmin/how-oc-debug-works">openshift debug node/NODE</a> container.</p>
+</blockquote>
+<p>
+Once access to the node is established the process running inside the pod needs
+to be found: a lot of these commands depend on the container runtime in use, so
+for the remainder I will assume the cluster is using <code class="verbatim">CRIO</code>.<sup class="footnote-reference"><a id="footnote-reference-6" href="#footnote-6">6</a></sup></p>
+<ol>
+<li>
+<p>Find the Pod ID for our <code class="verbatim">my-broken-pod</code> pod:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">POD_ID</span><span class="o">=</span><span class="k">$(</span>crictl pods --name my-broken-pod -o json <span class="p">|</span> jq -r <span class="s1">&#39;.items[] | select(.state == &#34;SANDBOX_READY&#34;) | .id&#39;</span><span class="k">)</span></span></span></code></pre></div>
+</div>
+</li>
+<li>
+<p>Find all processes inside this pod:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">CONTAINERS</span><span class="o">=</span><span class="k">$(</span>crictl ps --pod d718ccb51d73896035324f6d9d9d12cc6818027ab18e5f78b295b518c62b46bd -o json <span class="p">|</span> jq -r <span class="s1">&#39;.containers[].id&#39;</span><span class="k">)</span></span></span></code></pre></div>
+</div>
+</li>
+<li>
+<p>Find all processes inside these containers (or just choose the one container that is running the crashing process):</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">crictl inspect 154c67e44fcc843201aa582214395c82eb0e40acfda1ef1a9e12567f371aa13d <span class="p">|</span> jq -r <span class="s2">&#34;.info.pid&#34;</span></span></span></code></pre></div>
+</div>
+</li>
+</ol>
+<p>With the <code class="verbatim">PID</code> it is now possible to enter some of the namespaces of this
+process, while maintaining access to all binaries installed on the machine we
+SSHed to (as long as the <code class="verbatim">mount</code> namespace is <strong>not</strong> used with <code class="verbatim">nsenter</code> -
+indicated by the <code class="verbatim">-m</code> flag):</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">PID</span><span class="o">=</span><span class="m">1234</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">nsenter -t <span class="nv">$PID</span> -n -p -u</span></span></code></pre></div>
+</div>
+<p>
+Often it can be useful to add <a href="https://man7.org/linux/man-pages/man7/namespaces.7.html">namespaces</a> incrementally to see if one of the
+namespaces might have an impact on the container&#39;s behaviour.</p>
+<p>
+In this case it&#39;s now possible to inspect the process that is refusing to work
+with all tools available on the host - in case of a <code class="verbatim">minikube</code> cluster this
+includes tools like <code class="verbatim">lsof</code> and <code class="verbatim">strace</code>.</p>
+<p>
+But first let&#39;s check if the <code class="verbatim">ReadinessProbe</code> works right now:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">curl -I localhost:3000/readyz</span></span></code></pre></div>
+</div>
+<div class="src src-text">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="ln">1</span><span class="cl">HTTP/1.1 500 Internal Server Error
+</span></span><span class="line"><span class="ln">2</span><span class="cl">content-type: text/plain; charset=utf-8
+</span></span><span class="line"><span class="ln">3</span><span class="cl">content-length: 7
+</span></span><span class="line"><span class="ln">4</span><span class="cl">date: Fri, 01 Dec 2023 11:16:12 GMT</span></span></code></pre></div>
+</div>
+<p>
+So it is returning a <strong>500</strong> error - maybe we can get some more information what
+the process is actually doing using strace:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">strace -f -p <span class="s2">&#34;</span><span class="nv">$PID</span><span class="s2">&#34;</span></span></span></code></pre></div>
+</div>
+<div class="src src-text">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="ln">1</span><span class="cl">[pid 128904] epoll_wait(3,  &lt;unfinished ...&gt;
+</span></span><span class="line"><span class="ln">2</span><span class="cl">[pid 128893] futex(0x7f6985695940, FUTEX_WAIT_PRIVATE, 1, NULL &lt;unfinished ...&gt;
+</span></span><span class="line"><span class="ln">3</span><span class="cl">[pid 128904] &lt;... epoll_wait resumed&gt;[], 1024, 202) = 0
+</span></span><span class="line"><span class="ln">4</span><span class="cl">[pid 128904] epoll_wait(3, [], 1024, 17) = 0
+</span></span><span class="line"><span class="ln">5</span><span class="cl">[pid 128904] statx(AT_FDCWD, &#34;/opt/config/additional_file&#34;, AT_STATX_SYNC_AS_STAT, STATX_ALL, {stx_mask=STATX_ALL|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFREG|0644, stx_size=0, ...}) = 0
+</span></span><span class="line"><span class="ln">6</span><span class="cl">[pid 128904] write(1, &#34;app_state bad - configuration at&#34;..., 61) = 61
+</span></span><span class="line"><span class="ln">7</span><span class="cl">[pid 128904] write(4, &#34;\1\0\0\0\0\0\0\0&#34;, 8) = 8</span></span></code></pre></div>
+</div>
+<p>
+It seems to <code class="verbatim">stat</code> a configuration file at <code class="verbatim">/opt/config/additional_file</code> -
+that&#39;s strange, as the configuration should live in another file
+(<code class="verbatim">config.toml</code>)<sup class="footnote-reference"><a id="footnote-reference-7" href="#footnote-7">7</a></sup>.</p>
+<p>
+Time to actually use the mount namespace and see what&#39;s in <code class="verbatim">/opt/config</code></p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">nsenter -t <span class="nv">$PID</span> -n -p -u -m
+</span></span><span class="line"><span class="ln">2</span><span class="cl">ls /opt/config</span></span></code></pre></div>
+</div>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">additional_file  config.toml</span></span></code></pre></div>
+</div>
+<p>
+Well the file is there - so let&#39;s update our configuration to not contain it and
+see if it unbreaks our application:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">kubectl patch -n default configmaps myconfig --type<span class="o">=</span>json -p <span class="s1">&#39;[{&#34;op&#34;: &#34;remove&#34;, &#34;path&#34;: &#34;/data/additional_file&#34;}]&#39;</span></span></span></code></pre></div>
+</div>
+<p>
+After removing that key from the <code class="verbatim">ConfigMap</code> and a Pod restart it seems our
+application is finally happy!</p>
+<div class="src src-text">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="ln">1</span><span class="cl">my-broken-pod   2/2     Running   0          10s</span></span></code></pre></div>
+</div>
+<blockquote>
+<p>Obviously in this case the <code class="verbatim">strace</code> command could also have been run directly
+from the node, but knowing how to incrementally add container namespaces can
+still be useful - e.g. to check how a mounted filesystem really looks like
+inside the container.</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-headline-20" class="outline-3">
+<h3 id="headline-20">
+References
+</h3>
+<div id="outline-text-headline-20" class="outline-text-3">
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/">Ephemeral containers (official documentation)</a></li>
+<li><a href="https://iximiuz.com/en/posts/kubernetes-ephemeral-containers/">Ephemeral containers (great blog post)</a></li>
+<li><a href="https://man7.org/linux/man-pages/man1/nsenter.1.html">nsenter man page</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-21" class="outline-2">
+<h2 id="headline-21">
+Footnotes
+</h2>
+</div>
+<div class="footnotes">
+<hr class="footnotes-separatator">
+<div class="footnote-definitions">
+<div class="footnote-definition">
+<sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
+<div class="footnote-body">
+<p>For Ubuntu you will have to edit the file <code class="verbatim">/boot/firmware/cmdline.txt</code>
+and add the options <code class="verbatim">cgroup_memory=1 cgroup_enable=memory</code> at the end of the
+line for <code class="verbatim">k3s</code> (or <code class="verbatim">containers</code> in general) to work.</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-2"><a href="#footnote-reference-2">2</a></sup>
+<div class="footnote-body">
+<p>See <a href="https://github.com/kubernetes/ingress-nginx/pull/3852">https://github.com/kubernetes/ingress-nginx/pull/3852</a> </p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-3"><a href="#footnote-reference-3">3</a></sup>
+<div class="footnote-body">
+<p>This might hopefully become easier in the future: <a href="https://github.com/ansible/ansible/issues/60215">https://github.com/ansible/ansible/issues/60215</a></p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-4"><a href="#footnote-reference-4">4</a></sup>
+<div class="footnote-body">
+<p>As documented <a href="https://github.com/kata-containers/packaging/blob/master/snap/README.md#initial-setup">here</a>.</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-5"><a href="#footnote-reference-5">5</a></sup>
+<div class="footnote-body">
+<p>Most information in this section is a direct extract from <a href="https://github.com/kata-containers/packaging/pull/823">this PR</a> adding <code class="verbatim">k3s</code> support to <code class="verbatim">kata-deploy</code>.</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-6"><a href="#footnote-reference-6">6</a></sup>
+<div class="footnote-body">
+<p>If the process is easy to identify running <code class="verbatim">ps</code> and grepping for the
+process commandline will also work.</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-7"><a href="#footnote-reference-7">7</a></sup>
+<div class="footnote-body">
+<p>Obviously in this example this file was mounted from the <code class="verbatim">ConfigMap</code> - in
+reality this might indicate problems with other software that might inject
+libraries into all processes via <code class="verbatim">LD_PRELOAD</code> modifications.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://blog.niflheim.cc/">Personal blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

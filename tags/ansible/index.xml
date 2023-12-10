@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>ansible on Personal blog</title>
     <link>https://blog.niflheim.cc/tags/ansible/</link>
     <description>Recent content in ansible on Personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 08 May 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://blog.niflheim.cc/tags/ansible/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 08 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.niflheim.cc/tags/ansible/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Testing an ansible collection</title>
       <link>https://blog.niflheim.cc/posts/testing-ansible-collections/</link>
       <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
+      
       <guid>https://blog.niflheim.cc/posts/testing-ansible-collections/</guid>
       <description>When wanting to work on a collection for ansible it is (for now1) important to check it out in a very specific folder structure or it will not be possible to run the tests for it.
 When trying to run ansible-test integration it will otherwise throw the following error:
-ERROR: The current working directory must be at or below: - an Ansible collection: {...}/ansible_collections/{namespace}/{collection}/ Current working directory: &amp;lt;some_other_dir&amp;gt; The collection must be really placed inside a subfolder of a folder called ansible_collections and neither namespace nor collection can contain any symbols except alphanumberics or underscores ([a-zA-Z0-9_]):</description>
+1ERROR: The current working directory must be at or below: 2 3 - an Ansible collection: {...}/ansible_collections/{namespace}/{collection}/ 4 5Current working directory: &amp;lt;some_other_dir&amp;gt; The collection must be really placed inside a subfolder of a folder called ansible_collections and neither namespace nor collection can contain any symbols except alphanumberics or underscores ([a-zA-Z0-9_]):</description>
     </item>
+    
   </channel>
 </rss>

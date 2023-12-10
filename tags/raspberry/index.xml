@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>raspberry on Personal blog</title>
     <link>https://blog.niflheim.cc/tags/raspberry/</link>
     <description>Recent content in raspberry on Personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 21 May 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://blog.niflheim.cc/tags/raspberry/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.niflheim.cc/tags/raspberry/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Install kata-containers on K3S on aarch64</title>
       <link>https://blog.niflheim.cc/posts/kata_containers_raspberry/</link>
       <pubDate>Thu, 21 May 2020 00:00:00 +0000</pubDate>
+      
       <guid>https://blog.niflheim.cc/posts/kata_containers_raspberry/</guid>
       <description>To install kata-containers on a raspberry-pi and integrating it into kubernetes a few steps are currently required:
 Install kata-containers Setup integration into containerd Setup integration into kubernetes Install kata-containers Currently the easiest (and apparently only) officially supported way to install kata-containers on an aarch64 system is to use snaps.
 If you are using the Ubuntu arm version this is already included in the installation and you can install kata-containers with a single command1:</description>
     </item>
+    
     <item>
       <title>Deploying Teamspeak on a Raspberry PI kubernetes cluster</title>
       <link>https://blog.niflheim.cc/posts/teamspeak-k8s-arm/</link>
       <pubDate>Fri, 08 May 2020 22:59:00 +0200</pubDate>
+      
       <guid>https://blog.niflheim.cc/posts/teamspeak-k8s-arm/</guid>
       <description>While this post will end up with a running Teamspeak server, it is very hard on the resources of the Raspberry Pi and might not be suitable for everyday use.
 To deploy a teamspeak server on raspberry pi a few things need to be done:
 (optional) Get a Kubernetes cluster up and running (this is not required, if you just want to run the docker container directly). Get Teamspeak to run on ARM.</description>
     </item>
+    
   </channel>
 </rss>

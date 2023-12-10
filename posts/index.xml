@@ -1,58 +1,78 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on Personal blog</title>
     <link>https://blog.niflheim.cc/posts/</link>
     <description>Recent content in Posts on Personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 Dec 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://blog.niflheim.cc/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.niflheim.cc/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Debugging kubernetes containers</title>
       <link>https://blog.niflheim.cc/posts/debugging_kubernetes_containers/</link>
       <pubDate>Fri, 01 Dec 2023 00:00:00 +0000</pubDate>
+      
       <guid>https://blog.niflheim.cc/posts/debugging_kubernetes_containers/</guid>
       <description>The scenario: you have a running kubernetes cluster, but suddenly some of your containers start to have problems.
 Obviously now there must be a way to find out what exactly is causing these problems.
 In this post I&amp;rsquo;ll highlight two ways to debug a container running on kubernetes:
 ephemeral-containers (which is likely what you should use most of the time) nsenter (which is a last resort debugging option that requires access to the node the Pod is running on) Want to follow along?</description>
     </item>
+    
     <item>
       <title>Install kata-containers on K3S on aarch64</title>
       <link>https://blog.niflheim.cc/posts/kata_containers_raspberry/</link>
       <pubDate>Thu, 21 May 2020 00:00:00 +0000</pubDate>
+      
       <guid>https://blog.niflheim.cc/posts/kata_containers_raspberry/</guid>
       <description>To install kata-containers on a raspberry-pi and integrating it into kubernetes a few steps are currently required:
 Install kata-containers Setup integration into containerd Setup integration into kubernetes Install kata-containers Currently the easiest (and apparently only) officially supported way to install kata-containers on an aarch64 system is to use snaps.
 If you are using the Ubuntu arm version this is already included in the installation and you can install kata-containers with a single command1:</description>
     </item>
+    
     <item>
       <title>Deploying Teamspeak on a Raspberry PI kubernetes cluster</title>
       <link>https://blog.niflheim.cc/posts/teamspeak-k8s-arm/</link>
       <pubDate>Fri, 08 May 2020 22:59:00 +0200</pubDate>
+      
       <guid>https://blog.niflheim.cc/posts/teamspeak-k8s-arm/</guid>
       <description>While this post will end up with a running Teamspeak server, it is very hard on the resources of the Raspberry Pi and might not be suitable for everyday use.
 To deploy a teamspeak server on raspberry pi a few things need to be done:
 (optional) Get a Kubernetes cluster up and running (this is not required, if you just want to run the docker container directly). Get Teamspeak to run on ARM.</description>
     </item>
+    
     <item>
       <title>Testing an ansible collection</title>
       <link>https://blog.niflheim.cc/posts/testing-ansible-collections/</link>
       <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
+      
       <guid>https://blog.niflheim.cc/posts/testing-ansible-collections/</guid>
       <description>When wanting to work on a collection for ansible it is (for now1) important to check it out in a very specific folder structure or it will not be possible to run the tests for it.
 When trying to run ansible-test integration it will otherwise throw the following error:
-ERROR: The current working directory must be at or below: - an Ansible collection: {...}/ansible_collections/{namespace}/{collection}/ Current working directory: &amp;lt;some_other_dir&amp;gt; The collection must be really placed inside a subfolder of a folder called ansible_collections and neither namespace nor collection can contain any symbols except alphanumberics or underscores ([a-zA-Z0-9_]):</description>
+1ERROR: The current working directory must be at or below: 2 3 - an Ansible collection: {...}/ansible_collections/{namespace}/{collection}/ 4 5Current working directory: &amp;lt;some_other_dir&amp;gt; The collection must be really placed inside a subfolder of a folder called ansible_collections and neither namespace nor collection can contain any symbols except alphanumberics or underscores ([a-zA-Z0-9_]):</description>
     </item>
+    
     <item>
       <title>Converting openssh private key to PEM format</title>
       <link>https://blog.niflheim.cc/posts/openssh-private-key/</link>
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
+      
       <guid>https://blog.niflheim.cc/posts/openssh-private-key/</guid>
       <description>Newer version of the openssh will use their own format to store a private key:
 -----BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY----- The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).
 To convert the key use ssh-keygen. The command will overwrite the private key file, so if the original key should be preserved make sure to create a backup:</description>
     </item>
+    
+    <item>
+      <title></title>
+      <link>https://blog.niflheim.cc/posts/posts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.niflheim.cc/posts/posts/</guid>
+      <description>Personal blog Converting openssh private key to PEM format&amp;#xa0;&amp;#xa0;&amp;#xa0;openssh Newer versions of the openssh will use their own format to store a private key:
+-----BEGIN OPENSSH PRIVATE KEY----- BASE64KEYTEXT -----END OPENSSH PRIVATE KEY----- The traditional format of the key can sometimes be useful (or even required - for example guacamole will not be able to use the OPENSSH key format).
+To convert the key use ssh-keygen. The command will overwrite the private key file, so if the original key should be preserved make sure to create a backup:</description>
+    </item>
+    
   </channel>
 </rss>

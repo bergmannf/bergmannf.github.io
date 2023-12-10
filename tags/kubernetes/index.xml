@@ -1,40 +1,45 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>kubernetes on Personal blog</title>
     <link>https://blog.niflheim.cc/tags/kubernetes/</link>
     <description>Recent content in kubernetes on Personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 Dec 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://blog.niflheim.cc/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.niflheim.cc/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Debugging kubernetes containers</title>
       <link>https://blog.niflheim.cc/posts/debugging_kubernetes_containers/</link>
       <pubDate>Fri, 01 Dec 2023 00:00:00 +0000</pubDate>
+      
       <guid>https://blog.niflheim.cc/posts/debugging_kubernetes_containers/</guid>
       <description>The scenario: you have a running kubernetes cluster, but suddenly some of your containers start to have problems.
 Obviously now there must be a way to find out what exactly is causing these problems.
 In this post I&amp;rsquo;ll highlight two ways to debug a container running on kubernetes:
 ephemeral-containers (which is likely what you should use most of the time) nsenter (which is a last resort debugging option that requires access to the node the Pod is running on) Want to follow along?</description>
     </item>
+    
     <item>
       <title>Install kata-containers on K3S on aarch64</title>
       <link>https://blog.niflheim.cc/posts/kata_containers_raspberry/</link>
       <pubDate>Thu, 21 May 2020 00:00:00 +0000</pubDate>
+      
       <guid>https://blog.niflheim.cc/posts/kata_containers_raspberry/</guid>
       <description>To install kata-containers on a raspberry-pi and integrating it into kubernetes a few steps are currently required:
 Install kata-containers Setup integration into containerd Setup integration into kubernetes Install kata-containers Currently the easiest (and apparently only) officially supported way to install kata-containers on an aarch64 system is to use snaps.
 If you are using the Ubuntu arm version this is already included in the installation and you can install kata-containers with a single command1:</description>
     </item>
+    
     <item>
       <title>Deploying Teamspeak on a Raspberry PI kubernetes cluster</title>
       <link>https://blog.niflheim.cc/posts/teamspeak-k8s-arm/</link>
       <pubDate>Fri, 08 May 2020 22:59:00 +0200</pubDate>
+      
       <guid>https://blog.niflheim.cc/posts/teamspeak-k8s-arm/</guid>
       <description>While this post will end up with a running Teamspeak server, it is very hard on the resources of the Raspberry Pi and might not be suitable for everyday use.
 To deploy a teamspeak server on raspberry pi a few things need to be done:
 (optional) Get a Kubernetes cluster up and running (this is not required, if you just want to run the docker container directly). Get Teamspeak to run on ARM.</description>
     </item>
+    
   </channel>
 </rss>
